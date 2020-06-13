@@ -4,4 +4,4 @@
 - `services/`: `routes`から要求された DB 操作などを行い,結果を返す
 - `models/`: DB 構造に合わせた構造体(structure)の定義などを行う.
 - `middlewares/`: ミドルウェア
-- `views/`: Vue.js を使ったフロントエンド部分
+- `templates/`: Vue.js を使ったフロントエンド部分
