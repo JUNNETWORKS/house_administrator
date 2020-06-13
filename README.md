@@ -1,4 +1,4 @@
-# House administrator
+# House Administrator
 
 [Draw.io](https://drive.google.com/file/d/12RB3hiBf5S1zVZie_11tMnItpChCKPAT/view?usp=sharing)
 
