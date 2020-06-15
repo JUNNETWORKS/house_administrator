@@ -13,6 +13,16 @@
 go run src/main.go
 ```
 
+## ルーティング
+
+### フロント
+
+- `/`: トップページ
+
+### バック
+
+gRPC で実装予定.
+
 ## 参考にしたサイト
 
 - [gin を最速でマスターしよう](https://qiita.com/Syoitu/items/8e7e3215fb7ac9dabc3a)
