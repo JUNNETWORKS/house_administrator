@@ -2,6 +2,8 @@
 
 [Draw.io](https://drive.google.com/file/d/12RB3hiBf5S1zVZie_11tMnItpChCKPAT/view?usp=sharing)
 
+API とフロントは分離せず, MVC アーキテクチャで構築する.
+
 ## 使用ライブラリ
 
 - [gin](https://github.com/gin-gonic/gin): Go の Web フレームワーク
