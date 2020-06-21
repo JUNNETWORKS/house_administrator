@@ -2,9 +2,9 @@
 
 [Draw.io](https://drive.google.com/file/d/12RB3hiBf5S1zVZie_11tMnItpChCKPAT/view?usp=sharing)
 
-API とフロントは分離せず, MVC アーキテクチャで構築する.
+API とフロントは分離する
 
-## 使用ライブラリ
+## 使用技術
 
 - [gin](https://github.com/gin-gonic/gin): Go の Web フレームワーク
 - [Vue.js](https://github.com/gin-gonic/gin): フロント担当
