@@ -1,0 +1,14 @@
+syntax = "proto3";
+package room;
+
+// 部屋番号
+enum RoomNumbers {
+    JUN_ROOM    = 0;  // JUNの部屋
+    SUBARU_ROOM = 1;  // すばるの部屋
+    NORIKO_ROOM = 2;  // ばあちゃんの部屋
+    LIVING_ROOM = 3;  // リビング
+    ENTRANCE    = 4;  // 玄関
+    STAIRS      = 5;  // 階段
+    BATH_ROOM   = 6;  // 風呂場
+    TOILET      = 7;  // トイレ
+}
