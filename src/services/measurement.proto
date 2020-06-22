@@ -1,6 +1,10 @@
 syntax = "proto3";
 package measurement;
-import "./room.proto";
+
+import "google/protobuf/empty.proto";
+import "room.proto";
+
+option go_package = ".;measurementpb";
 
 // 測定値の種類
 enum MeasurementType {
@@ -12,12 +16,23 @@ enum MeasurementType {
 
 // 測定値メッセージの定義
 message Measurement {
-    room.RoomNumbers room_number = 0;  // 部屋番号
-    string type = 1;  // 測定値の種類
-    float value = 2;  // 実際の測定値
-    int64 datetime = 3;  // 測定した時間(unix_time)
+    room.RoomNumbers room_number = 1;  // 部屋番号
+    MeasurementType type = 2;  // 測定値の種類
+    float value = 3;  // 実際の測定値
+    int64 datetime = 4;  // 測定した時間(unix_time)
 }
 
-service SendMeasurement {
-    
+message MeasurementRequest {
+    MeasurementType type = 1;
+}
+
+message MeasurementResponse {
+    Measurement measurement = 1;
+    string message = 2;
+    bool error = 3;
+}
+
+service MeasurementRecorder {
+    rpc Get (MeasurementRequest) returns (MeasurementResponse) {}
+    rpc GetAll (google.protobuf.Empty) returns (stream MeasurementResponse) {}
 }
