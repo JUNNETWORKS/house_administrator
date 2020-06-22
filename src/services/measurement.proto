@@ -1,16 +1,6 @@
 syntax = "proto3";
-
-// 部屋番号
-enum RoomNumbers {
-    JUN_ROOM    = 0;  // JUNの部屋
-    SUBARU_ROOM = 1;  // すばるの部屋
-    NORIKO_ROOM = 2;  // ばあちゃんの部屋
-    LIVING_ROOM = 3;  // リビング
-    ENTRANCE    = 4;  // 玄関
-    STAIRS      = 5;  // 階段
-    BATH_ROOM   = 6;  // 風呂場
-    TOILET      = 7;  // トイレ
-}
+package measurement;
+import "./room.proto";
 
 // 測定値の種類
 enum MeasurementType {
@@ -22,8 +12,12 @@ enum MeasurementType {
 
 // 測定値メッセージの定義
 message Measurement {
-    RoomNumbers room_number = 0;  // 部屋番号
+    room.RoomNumbers room_number = 0;  // 部屋番号
     string type = 1;  // 測定値の種類
     float value = 2;  // 実際の測定値
     int64 datetime = 3;  // 測定した時間(unix_time)
+}
+
+service SendMeasurement {
+    
 }
