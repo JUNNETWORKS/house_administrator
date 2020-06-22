@@ -15,3 +15,33 @@ protocol buffer language については [公式ドキュメント](https://deve
 
 - [サービス間通信のための新技術「gRPC」入門](https://knowledge.sakura.ad.jp/24059/)
 - [Language Guide (proto3)](https://developers.google.com/protocol-buffers/docs/proto3#adding_comments)
+
+### gRPC や関連ツールのインストール
+
+#### gRPC ライブラリ
+
+各言語 gRPC ライブラリが用意されている.
+
+今回は Python と Go を使うのでこの 2 つの言語の gRPC ライブラリのインストールについてのみ書く
+
+##### Python
+
+```bash
+pip3 install grpcio
+```
+
+[grpcio](https://github.com/grpc/grpc)
+
+##### Go
+
+```bash
+go get -u google.golang.org/grpc
+```
+
+[gRPC-go](https://github.com/grpc/grpc-go)
+
+#### protoc
+
+プロトコル定義ファイルから各言語のクラスを生成する protoc というツールが用意されているのでそれを使う.
+
+インストール方法は [How can I install protoc on Ubuntu 16.04?](https://askubuntu.com/questions/1072683/how-can-i-install-protoc-on-ubuntu-16-04) を参照.
