@@ -4,7 +4,7 @@ package measurement;
 import "google/protobuf/empty.proto";
 import "room.proto";
 
-option go_package = ".;measurementpb";
+option go_package = ".;pb"; 
 
 // 測定値の種類
 enum MeasurementType {
