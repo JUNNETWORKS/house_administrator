@@ -60,4 +60,5 @@ protoc -I proto --go_out=plugins=grpc:pb/ proto/measurement.proto
 - [Can I define a grpc call with a null request or response?](https://stackoverflow.com/questions/31768665/can-i-define-a-grpc-call-with-a-null-request-or-response): gRPC の rpc で Null のような値を扱う方法. rpc では必ずメッセージを指定する必要があるので, Empty というメッセージを定義して, それを引数と返り値にする.
 - [How to return an array in Protobuf service rpc](https://stackoverflow.com/questions/43167762/how-to-return-an-array-in-protobuf-service-rpc): rpc の returns の値に配列を入れる方法. 配列は使えず, stream 型を使うか, 新たなメッセージを定義する必要がある.
 - [gRPC(Go) で API を実装する](https://blog.fenrir-inc.com/jp/2016/10/grpc-go.html)
+- [Go で始める gRPC 入門](https://qiita.com/marnie_ms4/items/4582a1a0db363fe246f3)
 - [protoc で .proto ファイルから service に関する Go のコードが生成されない問題への対処方法](https://jun-networks.hatenablog.com/entry/2020/06/23/101652)
