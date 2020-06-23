@@ -13,10 +13,7 @@
 
 gRPC の説明は[さくらインターネットの記事](https://knowledge.sakura.ad.jp/24059/)がわかりやすい.
 
-protocol buffer language については [公式ドキュメント](https://developers.google.com/protocol-buffers/docs/proto3) を参照.
-
 - [サービス間通信のための新技術「gRPC」入門](https://knowledge.sakura.ad.jp/24059/)
-- [Language Guide (proto3)](https://developers.google.com/protocol-buffers/docs/proto3#adding_comments)
 
 ### gRPC や関連ツールのインストール
 
@@ -52,9 +49,15 @@ go get -u google.golang.org/grpc
 
 [Protocol Buffer Basics: Go](https://developers.google.com/protocol-buffers/docs/gotutorial#compiling-your-protocol-buffers)
 
+以下のコマンドで Go のコードを `pb/` 内に生成する.
+
+```bash
+protoc -I proto --go_out=plugins=grpc:pb/ proto/measurement.proto
+```
+
 ## 参考にしたサイト
 
 - [Can I define a grpc call with a null request or response?](https://stackoverflow.com/questions/31768665/can-i-define-a-grpc-call-with-a-null-request-or-response): gRPC の rpc で Null のような値を扱う方法. rpc では必ずメッセージを指定する必要があるので, Empty というメッセージを定義して, それを引数と返り値にする.
 - [How to return an array in Protobuf service rpc](https://stackoverflow.com/questions/43167762/how-to-return-an-array-in-protobuf-service-rpc): rpc の returns の値に配列を入れる方法. 配列は使えず, stream 型を使うか, 新たなメッセージを定義する必要がある.
 - [gRPC(Go) で API を実装する](https://blog.fenrir-inc.com/jp/2016/10/grpc-go.html)
-- [Protocol Buffer Basics: Go](https://developers.google.com/protocol-buffers/docs/gotutorial)
+- [protoc で .proto ファイルから service に関する Go のコードが生成されない問題への対処方法](https://jun-networks.hatenablog.com/entry/2020/06/23/101652)
