@@ -1,6 +1,8 @@
 syntax = "proto3";
 package room;
 
+option go_package = ".;pb"; 
+
 // 部屋番号
 enum RoomNumbers {
     JUN_ROOM    = 0;  // JUNの部屋
