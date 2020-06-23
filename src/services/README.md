@@ -52,7 +52,7 @@ go get -u google.golang.org/grpc
 以下のコマンドで Go のコードを `pb/` 内に生成する.
 
 ```bash
-protoc -I proto --go_out=plugins=grpc:pb/ proto/measurement.proto
+protoc -I proto --go_out=plugins=grpc:pb/ proto/*.proto
 ```
 
 ## 参考にしたサイト
