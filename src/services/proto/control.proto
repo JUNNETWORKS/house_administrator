@@ -1,0 +1,15 @@
+syntax = "proto3";
+package control;
+
+import "google/protobuf/empty.proto";
+import "room.proto";
+
+option go_package = ".;pb";
+
+message Hello {
+    string text = 1;
+}
+
+service Greeting {
+    rpc World(Hello) returns (Hello) {};
+}
