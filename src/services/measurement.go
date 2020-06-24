@@ -8,6 +8,7 @@ import (
 	"github.com/golang/protobuf/ptypes/empty"
 )
 
+// MeasurementRecorderServer はセンサーからの得た測定値に関するメソッドを持つ構造体です.
 type MeasurementRecorderServer struct {
 }
 
