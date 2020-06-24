@@ -265,6 +265,53 @@ func (x *MeasurementResponse) GetError() bool {
 	return false
 }
 
+type AvailableTypes struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	AvailableTypes []MeasurementType `protobuf:"varint,1,rep,packed,name=available_types,json=availableTypes,proto3,enum=measurement.MeasurementType" json:"available_types,omitempty"`
+}
+
+func (x *AvailableTypes) Reset() {
+	*x = AvailableTypes{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_measurement_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AvailableTypes) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AvailableTypes) ProtoMessage() {}
+
+func (x *AvailableTypes) ProtoReflect() protoreflect.Message {
+	mi := &file_measurement_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AvailableTypes.ProtoReflect.Descriptor instead.
+func (*AvailableTypes) Descriptor() ([]byte, []int) {
+	return file_measurement_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *AvailableTypes) GetAvailableTypes() []MeasurementType {
+	if x != nil {
+		return x.AvailableTypes
+	}
+	return nil
+}
+
 var File_measurement_proto protoreflect.FileDescriptor
 
 var file_measurement_proto_rawDesc = []byte{
@@ -295,25 +342,31 @@ var file_measurement_proto_rawDesc = []byte{
 	0x52, 0x0b, 0x6d, 0x65, 0x61, 0x73, 0x75, 0x72, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x18, 0x0a,
 	0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
 	0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x2a, 0x59, 0x0a,
-	0x0f, 0x4d, 0x65, 0x61, 0x73, 0x75, 0x72, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65,
-	0x12, 0x0f, 0x0a, 0x0b, 0x54, 0x45, 0x4d, 0x50, 0x45, 0x52, 0x41, 0x54, 0x55, 0x52, 0x45, 0x10,
-	0x00, 0x12, 0x0c, 0x0a, 0x08, 0x48, 0x55, 0x4d, 0x49, 0x44, 0x49, 0x54, 0x59, 0x10, 0x01, 0x12,
-	0x10, 0x0a, 0x0c, 0x41, 0x49, 0x52, 0x5f, 0x50, 0x52, 0x45, 0x53, 0x53, 0x55, 0x52, 0x45, 0x10,
-	0x02, 0x12, 0x15, 0x0a, 0x11, 0x43, 0x4f, 0x32, 0x5f, 0x43, 0x4f, 0x4e, 0x43, 0x45, 0x4e, 0x54,
-	0x52, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x10, 0x03, 0x32, 0xa9, 0x01, 0x0a, 0x13, 0x4d, 0x65, 0x61,
-	0x73, 0x75, 0x72, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x65, 0x72,
-	0x12, 0x4a, 0x0a, 0x03, 0x47, 0x65, 0x74, 0x12, 0x1f, 0x2e, 0x6d, 0x65, 0x61, 0x73, 0x75, 0x72,
-	0x65, 0x6d, 0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x65, 0x61, 0x73, 0x75, 0x72, 0x65, 0x6d, 0x65, 0x6e,
-	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x20, 0x2e, 0x6d, 0x65, 0x61, 0x73, 0x75,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x22, 0x57, 0x0a,
+	0x0e, 0x41, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x6c, 0x65, 0x54, 0x79, 0x70, 0x65, 0x73, 0x12,
+	0x45, 0x0a, 0x0f, 0x61, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x6c, 0x65, 0x5f, 0x74, 0x79, 0x70,
+	0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0e, 0x32, 0x1c, 0x2e, 0x6d, 0x65, 0x61, 0x73, 0x75,
 	0x72, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x65, 0x61, 0x73, 0x75, 0x72, 0x65, 0x6d, 0x65,
-	0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x46, 0x0a, 0x06,
-	0x47, 0x65, 0x74, 0x41, 0x6c, 0x6c, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x20,
-	0x2e, 0x6d, 0x65, 0x61, 0x73, 0x75, 0x72, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x2e, 0x4d, 0x65, 0x61,
-	0x73, 0x75, 0x72, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x22, 0x00, 0x30, 0x01, 0x42, 0x06, 0x5a, 0x04, 0x2e, 0x3b, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x52, 0x0e, 0x61, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x6c,
+	0x65, 0x54, 0x79, 0x70, 0x65, 0x73, 0x2a, 0x59, 0x0a, 0x0f, 0x4d, 0x65, 0x61, 0x73, 0x75, 0x72,
+	0x65, 0x6d, 0x65, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x12, 0x0f, 0x0a, 0x0b, 0x54, 0x45, 0x4d,
+	0x50, 0x45, 0x52, 0x41, 0x54, 0x55, 0x52, 0x45, 0x10, 0x00, 0x12, 0x0c, 0x0a, 0x08, 0x48, 0x55,
+	0x4d, 0x49, 0x44, 0x49, 0x54, 0x59, 0x10, 0x01, 0x12, 0x10, 0x0a, 0x0c, 0x41, 0x49, 0x52, 0x5f,
+	0x50, 0x52, 0x45, 0x53, 0x53, 0x55, 0x52, 0x45, 0x10, 0x02, 0x12, 0x15, 0x0a, 0x11, 0x43, 0x4f,
+	0x32, 0x5f, 0x43, 0x4f, 0x4e, 0x43, 0x45, 0x4e, 0x54, 0x52, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x10,
+	0x03, 0x32, 0xad, 0x01, 0x0a, 0x13, 0x4d, 0x65, 0x61, 0x73, 0x75, 0x72, 0x65, 0x6d, 0x65, 0x6e,
+	0x74, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x12, 0x4a, 0x0a, 0x03, 0x47, 0x65, 0x74,
+	0x12, 0x1f, 0x2e, 0x6d, 0x65, 0x61, 0x73, 0x75, 0x72, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x2e, 0x4d,
+	0x65, 0x61, 0x73, 0x75, 0x72, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x20, 0x2e, 0x6d, 0x65, 0x61, 0x73, 0x75, 0x72, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x2e,
+	0x4d, 0x65, 0x61, 0x73, 0x75, 0x72, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x4a, 0x0a, 0x11, 0x47, 0x65, 0x74, 0x41, 0x76, 0x61, 0x69,
+	0x6c, 0x61, 0x62, 0x6c, 0x65, 0x54, 0x79, 0x70, 0x65, 0x73, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f,
+	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70,
+	0x74, 0x79, 0x1a, 0x1b, 0x2e, 0x6d, 0x65, 0x61, 0x73, 0x75, 0x72, 0x65, 0x6d, 0x65, 0x6e, 0x74,
+	0x2e, 0x41, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x6c, 0x65, 0x54, 0x79, 0x70, 0x65, 0x73, 0x22,
+	0x00, 0x42, 0x06, 0x5a, 0x04, 0x2e, 0x3b, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var (
@@ -329,29 +382,31 @@ func file_measurement_proto_rawDescGZIP() []byte {
 }
 
 var file_measurement_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_measurement_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_measurement_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_measurement_proto_goTypes = []interface{}{
 	(MeasurementType)(0),        // 0: measurement.MeasurementType
 	(*Measurement)(nil),         // 1: measurement.Measurement
 	(*MeasurementRequest)(nil),  // 2: measurement.MeasurementRequest
 	(*MeasurementResponse)(nil), // 3: measurement.MeasurementResponse
-	(RoomNumbers)(0),            // 4: room.RoomNumbers
-	(*empty.Empty)(nil),         // 5: google.protobuf.Empty
+	(*AvailableTypes)(nil),      // 4: measurement.AvailableTypes
+	(RoomNumbers)(0),            // 5: room.RoomNumbers
+	(*empty.Empty)(nil),         // 6: google.protobuf.Empty
 }
 var file_measurement_proto_depIdxs = []int32{
-	4, // 0: measurement.Measurement.room_number:type_name -> room.RoomNumbers
+	5, // 0: measurement.Measurement.room_number:type_name -> room.RoomNumbers
 	0, // 1: measurement.Measurement.type:type_name -> measurement.MeasurementType
 	0, // 2: measurement.MeasurementRequest.type:type_name -> measurement.MeasurementType
 	1, // 3: measurement.MeasurementResponse.measurement:type_name -> measurement.Measurement
-	2, // 4: measurement.MeasurementRecorder.Get:input_type -> measurement.MeasurementRequest
-	5, // 5: measurement.MeasurementRecorder.GetAll:input_type -> google.protobuf.Empty
-	3, // 6: measurement.MeasurementRecorder.Get:output_type -> measurement.MeasurementResponse
-	3, // 7: measurement.MeasurementRecorder.GetAll:output_type -> measurement.MeasurementResponse
-	6, // [6:8] is the sub-list for method output_type
-	4, // [4:6] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	0, // 4: measurement.AvailableTypes.available_types:type_name -> measurement.MeasurementType
+	2, // 5: measurement.MeasurementRecorder.Get:input_type -> measurement.MeasurementRequest
+	6, // 6: measurement.MeasurementRecorder.GetAvailableTypes:input_type -> google.protobuf.Empty
+	3, // 7: measurement.MeasurementRecorder.Get:output_type -> measurement.MeasurementResponse
+	4, // 8: measurement.MeasurementRecorder.GetAvailableTypes:output_type -> measurement.AvailableTypes
+	7, // [7:9] is the sub-list for method output_type
+	5, // [5:7] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_measurement_proto_init() }
@@ -397,6 +452,18 @@ func file_measurement_proto_init() {
 				return nil
 			}
 		}
+		file_measurement_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AvailableTypes); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -404,7 +471,7 @@ func file_measurement_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_measurement_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   3,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -432,7 +499,8 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MeasurementRecorderClient interface {
 	Get(ctx context.Context, in *MeasurementRequest, opts ...grpc.CallOption) (*MeasurementResponse, error)
-	GetAll(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (MeasurementRecorder_GetAllClient, error)
+	// 利用可能なセンサーの種類を返す
+	GetAvailableTypes(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*AvailableTypes, error)
 }
 
 type measurementRecorderClient struct {
@@ -452,42 +520,20 @@ func (c *measurementRecorderClient) Get(ctx context.Context, in *MeasurementRequ
 	return out, nil
 }
 
-func (c *measurementRecorderClient) GetAll(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (MeasurementRecorder_GetAllClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_MeasurementRecorder_serviceDesc.Streams[0], "/measurement.MeasurementRecorder/GetAll", opts...)
+func (c *measurementRecorderClient) GetAvailableTypes(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*AvailableTypes, error) {
+	out := new(AvailableTypes)
+	err := c.cc.Invoke(ctx, "/measurement.MeasurementRecorder/GetAvailableTypes", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &measurementRecorderGetAllClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type MeasurementRecorder_GetAllClient interface {
-	Recv() (*MeasurementResponse, error)
-	grpc.ClientStream
-}
-
-type measurementRecorderGetAllClient struct {
-	grpc.ClientStream
-}
-
-func (x *measurementRecorderGetAllClient) Recv() (*MeasurementResponse, error) {
-	m := new(MeasurementResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
+	return out, nil
 }
 
 // MeasurementRecorderServer is the server API for MeasurementRecorder service.
 type MeasurementRecorderServer interface {
 	Get(context.Context, *MeasurementRequest) (*MeasurementResponse, error)
-	GetAll(*empty.Empty, MeasurementRecorder_GetAllServer) error
+	// 利用可能なセンサーの種類を返す
+	GetAvailableTypes(context.Context, *empty.Empty) (*AvailableTypes, error)
 }
 
 // UnimplementedMeasurementRecorderServer can be embedded to have forward compatible implementations.
@@ -497,8 +543,8 @@ type UnimplementedMeasurementRecorderServer struct {
 func (*UnimplementedMeasurementRecorderServer) Get(context.Context, *MeasurementRequest) (*MeasurementResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (*UnimplementedMeasurementRecorderServer) GetAll(*empty.Empty, MeasurementRecorder_GetAllServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetAll not implemented")
+func (*UnimplementedMeasurementRecorderServer) GetAvailableTypes(context.Context, *empty.Empty) (*AvailableTypes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAvailableTypes not implemented")
 }
 
 func RegisterMeasurementRecorderServer(s *grpc.Server, srv MeasurementRecorderServer) {
@@ -523,25 +569,22 @@ func _MeasurementRecorder_Get_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MeasurementRecorder_GetAll_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(empty.Empty)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
+func _MeasurementRecorder_GetAvailableTypes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(empty.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
 	}
-	return srv.(MeasurementRecorderServer).GetAll(m, &measurementRecorderGetAllServer{stream})
-}
-
-type MeasurementRecorder_GetAllServer interface {
-	Send(*MeasurementResponse) error
-	grpc.ServerStream
-}
-
-type measurementRecorderGetAllServer struct {
-	grpc.ServerStream
-}
-
-func (x *measurementRecorderGetAllServer) Send(m *MeasurementResponse) error {
-	return x.ServerStream.SendMsg(m)
+	if interceptor == nil {
+		return srv.(MeasurementRecorderServer).GetAvailableTypes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/measurement.MeasurementRecorder/GetAvailableTypes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MeasurementRecorderServer).GetAvailableTypes(ctx, req.(*empty.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 var _MeasurementRecorder_serviceDesc = grpc.ServiceDesc{
@@ -552,13 +595,11 @@ var _MeasurementRecorder_serviceDesc = grpc.ServiceDesc{
 			MethodName: "Get",
 			Handler:    _MeasurementRecorder_Get_Handler,
 		},
-	},
-	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "GetAll",
-			Handler:       _MeasurementRecorder_GetAll_Handler,
-			ServerStreams: true,
+			MethodName: "GetAvailableTypes",
+			Handler:    _MeasurementRecorder_GetAvailableTypes_Handler,
 		},
 	},
+	Streams:  []grpc.StreamDesc{},
 	Metadata: "measurement.proto",
 }

@@ -32,7 +32,12 @@ message MeasurementResponse {
     bool error = 3;
 }
 
+message AvailableTypes {
+    repeated MeasurementType available_types = 1;
+}
+
 service MeasurementRecorder {
     rpc Get (MeasurementRequest) returns (MeasurementResponse) {}
-    rpc GetAll (google.protobuf.Empty) returns (stream MeasurementResponse) {}
+    // 利用可能なセンサーの種類を返す
+    rpc GetAvailableTypes (google.protobuf.Empty) returns (AvailableTypes) {}
 }
