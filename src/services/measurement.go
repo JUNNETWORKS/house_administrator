@@ -9,6 +9,7 @@ import (
 )
 
 // MeasurementRecorderServer はセンサーからの得た測定値に関するメソッドを持つ構造体です.
+// pb.MeasurementRecorderServer の interface を満たすようにメソッドを実装する必要があります.
 type MeasurementRecorderServer struct {
 }
 
@@ -40,6 +41,7 @@ func (server *MeasurementRecorderServer) Get(_ context.Context, message *pb.Meas
 	return response, nil
 }
 
-func (server *MeasurementRecorderServer) GetAll(*empty.Empty, pb.MeasurementRecorder_GetAllServer) error {
+// GetAvailableTypes は取得可能な利用可能なMeasurementTypeのリストを持つAvailableTypesを返す
+func (*MeasurementRecorderServer) GetAvailableTypes(context.Context, *empty.Empty) (*pb.AvailableTypes, error) {
 
 }
