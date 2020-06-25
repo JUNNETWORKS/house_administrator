@@ -23,10 +23,12 @@ gRPC の説明は[さくらインターネットの記事](https://knowledge.sak
 ##### Python
 
 ```bash
-pip3 install grpcio
+pip3 install grpcio grpcio-tools
 ```
 
 [grpcio](https://github.com/grpc/grpc)
+
+grpcio-tools はコード生成のために使う. コード生成が必要なければインストールしなくて良い.
 
 ##### Go
 
@@ -42,15 +44,25 @@ go get -u google.golang.org/grpc
 
 インストール方法は [How can I install protoc on Ubuntu 16.04?](https://askubuntu.com/questions/1072683/how-can-i-install-protoc-on-ubuntu-16-04) を参照.
 
-#### GO
+#### Python
+
+以下のコマンドで `servants/jun_room/pb` 内に Python のコードが生成される
+
+```bash
+python -m grpc_tools.protoc -I proto --python_out=servants/jun_room/pb --grpc_python_out=servants/jun_room/pb proto/*.proto
+```
+
+#### Go
 
 [Protocol Buffer Basics: Go](https://developers.google.com/protocol-buffers/docs/gotutorial#compiling-your-protocol-buffers)
 
 以下のコマンドで Go のコードを `pb/` 内に生成する. (ちなみに `pb` は `protocol buffer` の略)
 
 ```bash
-protoc -I proto --go_out=plugins=grpc:pb/ ../../proto/*.proto
+protoc -I ../../proto --go_out=plugins=grpc:pb/ ../../proto/*.proto
 ```
+
+## 参考にしたサイト
 
 - [Can I define a grpc call with a null request or response?](https://stackoverflow.com/questions/31768665/can-i-define-a-grpc-call-with-a-null-request-or-response): gRPC の rpc で Null のような値を扱う方法. rpc では必ずメッセージを指定する必要があるので, Empty というメッセージを定義して, それを引数と返り値にする.
 - [How to return an array in Protobuf service rpc](https://stackoverflow.com/questions/43167762/how-to-return-an-array-in-protobuf-service-rpc): rpc の returns の値に配列を入れる方法. 配列は使えず, stream 型を使うか, 新たなメッセージを定義する必要がある.
