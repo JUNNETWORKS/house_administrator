@@ -49,10 +49,10 @@ go get -u google.golang.org/grpc
 
 [Protocol Buffer Basics: Go](https://developers.google.com/protocol-buffers/docs/gotutorial#compiling-your-protocol-buffers)
 
-以下のコマンドで Go のコードを `pb/` 内に生成する.
+以下のコマンドで Go のコードを `pb/` 内に生成する. (ちなみに `pb` は `protocol buffer` の略)
 
 ```bash
-protoc -I proto --go_out=plugins=grpc:pb/ proto/*.proto
+protoc -I proto --go_out=plugins=grpc:pb/ ../../proto/*.proto
 ```
 
 ## 参考にしたサイト
