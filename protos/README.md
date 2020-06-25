@@ -1,4 +1,4 @@
-# proto
+# protos
 
 このディレクトリは gRPC の protocol が定義されているぞい.
 
@@ -49,17 +49,17 @@ go get -u google.golang.org/grpc
 以下のコマンドで `servants/jun_room/pb` 内に Python のコードが生成される
 
 ```bash
-python -m grpc_tools.protoc -I proto --python_out=servants/jun_room/pb --grpc_python_out=servants/jun_room/pb proto/*.proto
+python -m grpc_tools.protoc -I proto --python_out=servants/jun_room/pb --grpc_python_out=servants/jun_room/pb protos/*.proto
 ```
 
 #### Go
 
 [Protocol Buffer Basics: Go](https://developers.google.com/protocol-buffers/docs/gotutorial#compiling-your-protocol-buffers)
 
-以下のコマンドで Go のコードを `pb/` 内に生成する. (ちなみに `pb` は `protocol buffer` の略)
+以下のコマンドで Go のコードを `administrator/services/pb/` 内に生成する. (ちなみに `pb` は `protocol buffer` の略)
 
 ```bash
-protoc -I ../../proto --go_out=plugins=grpc:pb/ ../../proto/*.proto
+protoc -I proto/ --go_out=plugins=grpc:administrator/services/pb/ protos/*.proto
 ```
 
 ## 参考にしたサイト
