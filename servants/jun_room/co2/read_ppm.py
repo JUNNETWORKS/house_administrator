@@ -1,8 +1,9 @@
 import serial
-from uart import use_uart
+
+from .uart import use_uart
 
 
-def read(serial_dev):
+def read_ppm(serial_dev):
     """CO2センサーからデータを取得する関数
     https://toranoana-lab.hatenablog.com/entry/2019/12/27/180048
     """
@@ -25,4 +26,4 @@ def read(serial_dev):
 
 if __name__ == "__main__":
     with use_uart() as serial_dev:
-        print(f"CO2 = {read(serial_dev)}[ppm]")
+        print(f"CO2 = {read_ppm(serial_dev)}[ppm]")
