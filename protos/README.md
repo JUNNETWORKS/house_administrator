@@ -4,6 +4,8 @@
 
 このワールドの共通言語というわけだな!
 
+![](https://media0.giphy.com/media/xTiTnxpQ3ghPiB2Hp6/giphy.gif)
+
 ## gRPC
 
 ### gRPC とはなんぞや
