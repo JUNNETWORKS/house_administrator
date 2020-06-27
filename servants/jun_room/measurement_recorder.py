@@ -44,4 +44,7 @@ class MeasurementRecorder(measurement_pb2_grpc.MeasurementRecorderServicer):
         return res
 
     def GetAvailableTypes(self, request, context):
-        pass
+        available_types = []
+        available_types.append(measurement_pb2.CO2_CONCENTRATION)
+        res = measurement_pb2.AvailableTypes(available_types=available_types)
+        return res
