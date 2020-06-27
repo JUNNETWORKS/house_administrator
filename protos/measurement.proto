@@ -32,12 +32,26 @@ message MeasurementResponse {
     bool error = 3;
 }
 
+message InsertResponse {
+    reserved 1;
+    string message = 2;
+    bool error = 3;
+}
+
 message AvailableTypes {
     repeated MeasurementType available_types = 1;
 }
 
 service MeasurementRecorder {
+    // Administrator -> Servant
+    // ある特定の種類のセンサーの値を返す
     rpc Get (MeasurementRequest) returns (MeasurementResponse) {}
     // 利用可能なセンサーの種類を返す
     rpc GetAvailableTypes (google.protobuf.Empty) returns (AvailableTypes) {}
+}
+
+service MeasurementStore{
+    // Administrator <- Servant
+    // ある特定の種類のセンサーの値をDBに登録する
+    rpc InsertData (Measurement) returns (InsertResponse) {}
 }

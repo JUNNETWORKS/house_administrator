@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='measurement',
   syntax='proto3',
   serialized_options=b'Z\004.;pb',
-  serialized_pb=b'\n\x11measurement.proto\x12\x0bmeasurement\x1a\x1bgoogle/protobuf/empty.proto\x1a\nroom.proto\"\x82\x01\n\x0bMeasurement\x12&\n\x0broom_number\x18\x01 \x01(\x0e\x32\x11.room.RoomNumbers\x12*\n\x04type\x18\x02 \x01(\x0e\x32\x1c.measurement.MeasurementType\x12\r\n\x05value\x18\x03 \x01(\x02\x12\x10\n\x08\x64\x61tetime\x18\x04 \x01(\x03\"@\n\x12MeasurementRequest\x12*\n\x04type\x18\x01 \x01(\x0e\x32\x1c.measurement.MeasurementType\"d\n\x13MeasurementResponse\x12-\n\x0bmeasurement\x18\x01 \x01(\x0b\x32\x18.measurement.Measurement\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\r\n\x05\x65rror\x18\x03 \x01(\x08\"G\n\x0e\x41vailableTypes\x12\x35\n\x0f\x61vailable_types\x18\x01 \x03(\x0e\x32\x1c.measurement.MeasurementType*Y\n\x0fMeasurementType\x12\x0f\n\x0bTEMPERATURE\x10\x00\x12\x0c\n\x08HUMIDITY\x10\x01\x12\x10\n\x0c\x41IR_PRESSURE\x10\x02\x12\x15\n\x11\x43O2_CONCENTRATION\x10\x03\x32\xad\x01\n\x13MeasurementRecorder\x12J\n\x03Get\x12\x1f.measurement.MeasurementRequest\x1a .measurement.MeasurementResponse\"\x00\x12J\n\x11GetAvailableTypes\x12\x16.google.protobuf.Empty\x1a\x1b.measurement.AvailableTypes\"\x00\x42\x06Z\x04.;pbb\x06proto3'
+  serialized_pb=b'\n\x11measurement.proto\x12\x0bmeasurement\x1a\x1bgoogle/protobuf/empty.proto\x1a\nroom.proto\"\x82\x01\n\x0bMeasurement\x12&\n\x0broom_number\x18\x01 \x01(\x0e\x32\x11.room.RoomNumbers\x12*\n\x04type\x18\x02 \x01(\x0e\x32\x1c.measurement.MeasurementType\x12\r\n\x05value\x18\x03 \x01(\x02\x12\x10\n\x08\x64\x61tetime\x18\x04 \x01(\x03\"@\n\x12MeasurementRequest\x12*\n\x04type\x18\x01 \x01(\x0e\x32\x1c.measurement.MeasurementType\"d\n\x13MeasurementResponse\x12-\n\x0bmeasurement\x18\x01 \x01(\x0b\x32\x18.measurement.Measurement\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\r\n\x05\x65rror\x18\x03 \x01(\x08\"6\n\x0eInsertResponse\x12\x0f\n\x07message\x18\x02 \x01(\t\x12\r\n\x05\x65rror\x18\x03 \x01(\x08J\x04\x08\x01\x10\x02\"G\n\x0e\x41vailableTypes\x12\x35\n\x0f\x61vailable_types\x18\x01 \x03(\x0e\x32\x1c.measurement.MeasurementType*Y\n\x0fMeasurementType\x12\x0f\n\x0bTEMPERATURE\x10\x00\x12\x0c\n\x08HUMIDITY\x10\x01\x12\x10\n\x0c\x41IR_PRESSURE\x10\x02\x12\x15\n\x11\x43O2_CONCENTRATION\x10\x03\x32\xad\x01\n\x13MeasurementRecorder\x12J\n\x03Get\x12\x1f.measurement.MeasurementRequest\x1a .measurement.MeasurementResponse\"\x00\x12J\n\x11GetAvailableTypes\x12\x16.google.protobuf.Empty\x1a\x1b.measurement.AvailableTypes\"\x00\x32Y\n\x10MeasurementStore\x12\x45\n\nInsertData\x12\x18.measurement.Measurement\x1a\x1b.measurement.InsertResponse\"\x00\x42\x06Z\x04.;pbb\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,room__pb2.DESCRIPTOR,])
 
@@ -50,8 +50,8 @@ _MEASUREMENTTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=449,
-  serialized_end=538,
+  serialized_start=505,
+  serialized_end=594,
 )
 _sym_db.RegisterEnumDescriptor(_MEASUREMENTTYPE)
 
@@ -191,6 +191,44 @@ _MEASUREMENTRESPONSE = _descriptor.Descriptor(
 )
 
 
+_INSERTRESPONSE = _descriptor.Descriptor(
+  name='InsertResponse',
+  full_name='measurement.InsertResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='message', full_name='measurement.InsertResponse.message', index=0,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='error', full_name='measurement.InsertResponse.error', index=1,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=376,
+  serialized_end=430,
+)
+
+
 _AVAILABLETYPES = _descriptor.Descriptor(
   name='AvailableTypes',
   full_name='measurement.AvailableTypes',
@@ -217,8 +255,8 @@ _AVAILABLETYPES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=376,
-  serialized_end=447,
+  serialized_start=432,
+  serialized_end=503,
 )
 
 _MEASUREMENT.fields_by_name['room_number'].enum_type = room__pb2._ROOMNUMBERS
@@ -229,6 +267,7 @@ _AVAILABLETYPES.fields_by_name['available_types'].enum_type = _MEASUREMENTTYPE
 DESCRIPTOR.message_types_by_name['Measurement'] = _MEASUREMENT
 DESCRIPTOR.message_types_by_name['MeasurementRequest'] = _MEASUREMENTREQUEST
 DESCRIPTOR.message_types_by_name['MeasurementResponse'] = _MEASUREMENTRESPONSE
+DESCRIPTOR.message_types_by_name['InsertResponse'] = _INSERTRESPONSE
 DESCRIPTOR.message_types_by_name['AvailableTypes'] = _AVAILABLETYPES
 DESCRIPTOR.enum_types_by_name['MeasurementType'] = _MEASUREMENTTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -254,6 +293,13 @@ MeasurementResponse = _reflection.GeneratedProtocolMessageType('MeasurementRespo
   })
 _sym_db.RegisterMessage(MeasurementResponse)
 
+InsertResponse = _reflection.GeneratedProtocolMessageType('InsertResponse', (_message.Message,), {
+  'DESCRIPTOR' : _INSERTRESPONSE,
+  '__module__' : 'measurement_pb2'
+  # @@protoc_insertion_point(class_scope:measurement.InsertResponse)
+  })
+_sym_db.RegisterMessage(InsertResponse)
+
 AvailableTypes = _reflection.GeneratedProtocolMessageType('AvailableTypes', (_message.Message,), {
   'DESCRIPTOR' : _AVAILABLETYPES,
   '__module__' : 'measurement_pb2'
@@ -270,8 +316,8 @@ _MEASUREMENTRECORDER = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=541,
-  serialized_end=714,
+  serialized_start=597,
+  serialized_end=770,
   methods=[
   _descriptor.MethodDescriptor(
     name='Get',
@@ -295,5 +341,29 @@ _MEASUREMENTRECORDER = _descriptor.ServiceDescriptor(
 _sym_db.RegisterServiceDescriptor(_MEASUREMENTRECORDER)
 
 DESCRIPTOR.services_by_name['MeasurementRecorder'] = _MEASUREMENTRECORDER
+
+
+_MEASUREMENTSTORE = _descriptor.ServiceDescriptor(
+  name='MeasurementStore',
+  full_name='measurement.MeasurementStore',
+  file=DESCRIPTOR,
+  index=1,
+  serialized_options=None,
+  serialized_start=772,
+  serialized_end=861,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='InsertData',
+    full_name='measurement.MeasurementStore.InsertData',
+    index=0,
+    containing_service=None,
+    input_type=_MEASUREMENT,
+    output_type=_INSERTRESPONSE,
+    serialized_options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_MEASUREMENTSTORE)
+
+DESCRIPTOR.services_by_name['MeasurementStore'] = _MEASUREMENTSTORE
 
 # @@protoc_insertion_point(module_scope)
