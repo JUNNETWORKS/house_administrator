@@ -51,7 +51,7 @@ go get -u google.golang.org/grpc
 以下のコマンドで `servants/jun_room/pb` 内に Python のコードが生成される
 
 ```bash
-python -m grpc_tools.protoc -I proto --python_out=servants/jun_room/pb --grpc_python_out=servants/jun_room/pb protos/*.proto
+python -m grpc_tools.protoc -I protos --python_out=servants/jun_room/pb --grpc_python_out=servants/jun_room/pb protos/*.proto
 ```
 
 #### Go
@@ -66,6 +66,7 @@ protoc -I proto/ --go_out=plugins=grpc:administrator/services/pb/ protos/*.proto
 
 ## 参考にしたサイト
 
+- [gRPC QuickStart](https://grpc.io/docs/quickstart/): gRPC 公式チュートリアル. これ見とけば大体わかる.
 - [Can I define a grpc call with a null request or response?](https://stackoverflow.com/questions/31768665/can-i-define-a-grpc-call-with-a-null-request-or-response): gRPC の rpc で Null のような値を扱う方法. rpc では必ずメッセージを指定する必要があるので, Empty というメッセージを定義して, それを引数と返り値にする.
 - [How to return an array in Protobuf service rpc](https://stackoverflow.com/questions/43167762/how-to-return-an-array-in-protobuf-service-rpc): rpc の returns の値に配列を入れる方法. 配列は使えず, stream 型を使うか, 新たなメッセージを定義する必要がある.
 - [gRPC(Go) で API を実装する](https://blog.fenrir-inc.com/jp/2016/10/grpc-go.html)
