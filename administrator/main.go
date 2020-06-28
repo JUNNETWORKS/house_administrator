@@ -4,9 +4,13 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
+
+	grpc "./grpc"
 )
 
 func main() {
+	grpc.Serve()
+
 	r := gin.Default()
 
 	// 利用可能な部屋を返す

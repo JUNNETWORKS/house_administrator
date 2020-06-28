@@ -1,4 +1,4 @@
-package services
+package grpc_services
 
 import (
 	"context"
@@ -43,5 +43,8 @@ func (server *MeasurementRecorderServer) Get(_ context.Context, message *pb.Meas
 
 // GetAvailableTypes は取得可能な利用可能なMeasurementTypeのリストを持つAvailableTypesを返す
 func (*MeasurementRecorderServer) GetAvailableTypes(context.Context, *empty.Empty) (*pb.AvailableTypes, error) {
-
+	available_types := pb.AvailableTypes{
+		AvailableTypes: []pb.MeasurementType{pb.MeasurementType_CO2_CONCENTRATION},
+	}
+	return &available_types, nil
 }

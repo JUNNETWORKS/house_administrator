@@ -12,7 +12,7 @@ def serve():
 
     # Serverオブジェクトに定義したServicerクラスを登録する
     measurement_pb2_grpc.add_MeasurementRecorderServicer_to_server(
-        MeasurementRecorder(), server
+        MeasurementRecorder(), server,
     )
 
     # 1234番ポートで待ち受けするよう指定する
