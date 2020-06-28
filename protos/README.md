@@ -61,7 +61,7 @@ python -m grpc_tools.protoc -I protos --python_out=servants/jun_room/pb --grpc_p
 以下のコマンドで Go のコードを `administrator/services/pb/` 内に生成する. (ちなみに `pb` は `protocol buffer` の略)
 
 ```bash
-protoc -I proto/ --go_out=plugins=grpc:administrator/services/pb/ protos/*.proto
+protoc -I protos/ --go_out=plugins=grpc:administrator/services/pb/ protos/*.proto
 ```
 
 ## 参考にしたサイト
