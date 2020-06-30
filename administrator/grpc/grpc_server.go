@@ -11,8 +11,8 @@ import (
 )
 
 func Serve() {
-	var port int = 1919
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", &port))
+	var port string = ":1919"
+	lis, err := net.Listen("tcp", fmt.Sprintf(port))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
