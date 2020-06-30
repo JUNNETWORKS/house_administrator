@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"net"
@@ -22,5 +23,12 @@ func serve(portNum int) {
 }
 
 func main() {
-	serve(1919)
+	var (
+		portNum int
+	)
+	/* コマンドラインオプションの定義 */
+	flag.IntVar(&portNum, "p", 1919, "gRPCサーバーの起動に使うポート番号")
+	flag.Parse()
+
+	serve(portNum)
 }
