@@ -4,12 +4,9 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
-
-	grpc "./grpc"
 )
 
 func main() {
-	grpc.Serve()
 
 	r := gin.Default()
 
