@@ -1,0 +1,6 @@
+version: "3"
+services:
+  gin:
+  grpc_server:
+  postgres:
+    image: postgres
