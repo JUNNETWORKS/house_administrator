@@ -33,6 +33,14 @@ go run administrator/main.go
 
 gRPC で実装予定.
 
+## 開発ロードマップ
+
+1. DB 構築の設定
+2. DB に対してデータを挿入, 参照する処理を実装
+3. gRPC で servant からデータを受け取れるように gRPC のインターフェースの実装
+4. 部屋の温度や湿度, エアコン制御などの回路の試作,開発
+5. servant から Administrator にデータを送る処理を実装
+
 ## 参考にしたサイト
 
 - [gin を最速でマスターしよう](https://qiita.com/Syoitu/items/8e7e3215fb7ac9dabc3a)
