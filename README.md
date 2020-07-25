@@ -12,8 +12,7 @@ API とフロントは分離する
 
 ## 使用技術
 
-- [gin](https://github.com/gin-gonic/gin): Go の Web フレームワーク
-- [Vue.js](https://github.com/gin-gonic/gin): フロント担当
+- GO (net/http, html/template, ...)
 
 ## 使い方
 
@@ -25,13 +24,32 @@ go run administrator/main.go
 
 ## ルーティング
 
-### フロント
-
-- `/`: トップページ
-
 ### バック
 
-gRPC で実装予定.
+| Path                                     | Description                                                     | Methods          |
+| ---------------------------------------- | --------------------------------------------------------------- | ---------------- |
+| rooms                                    | 部屋一覧                                                        | GET, POST        |
+| rooms/:room                              | 部屋のトップページ                                              | GET, DELETE, PUT |
+| /rooms/:room/measurements                | 利用可能な計測値の種類を返す/登録する (温度や湿度,CO2 濃度など) | GET, POST        |
+| /rooms/:room/measurements/temperature    | 部屋の温度を返す                                                | GET              |
+| /rooms/:room/controllers                 | 利用可能な操作                                                  | GET, POST        |
+| /rooms/:room/controllers/air-conditioner | エアコンの操作                                                  | POST             |
+
+基本的にバックエンドサーバーではブラウザで必要なデータの取得や新たなデバイスの登録などを行う.
+
+具体的に Servant からデータを Administrator に送る際には gRPC で送る
+
+### フロント
+
+| Path | Description  |
+| ---- | ------------ |
+| /    | トップページ |
+
+何も決まっとらん
+
+### grpc
+
+これから
 
 ## 開発ロードマップ
 
