@@ -60,6 +60,3 @@ go run administrator/main.go
 5. servant から Administrator にデータを送る処理を実装
 
 ## 参考にしたサイト
-
-- [gin を最速でマスターしよう](https://qiita.com/Syoitu/items/8e7e3215fb7ac9dabc3a)
-- [gin GitHub](https://github.com/gin-gonic/gin)
