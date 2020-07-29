@@ -1,6 +1,9 @@
 version: "3"
 services:
-  gin:
-  grpc_server:
-  postgres:
-    image: postgres
+  db:
+    image: postgres:12.3
+    restart: always
+    volumes:
+      - ./db/setup.sql:/docker-entrypoint-initdb.d/setup.sql
+    environment:
+      POSTGRES_PASSWORD: postgres
