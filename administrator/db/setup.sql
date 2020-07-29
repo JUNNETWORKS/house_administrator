@@ -27,7 +27,7 @@ CREATE TABLE SensorType
 CREATE TABLE Sensor
 (
     id SERIAL PRIMARY KEY,
-    sensorType TEXT REFERENCES SensorType(id) NOT NULL
+    sensorType INTEGER REFERENCES SensorType(id) NOT NULL
 );
 
 CREATE TABLE SensorExtension
