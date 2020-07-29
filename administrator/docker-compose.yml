@@ -6,4 +6,4 @@ services:
     volumes:
       - ./db/setup.sql:/docker-entrypoint-initdb.d/setup.sql
     environment:
-      POSTGRES_PASSWORD: postgres
+      - POSTGRES_PASSWORD=postgres
