@@ -1,6 +1,10 @@
-CREATE TABLE User
+/* 
+userは予約語なので使えない
+https://stackoverflow.com/questions/22256124/cannot-create-a-database-table-named-user-in-postgresql
+*/
+CREATE TABLE Account
 (
-    userId SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL
 );
 
@@ -10,7 +14,7 @@ CREATE TABLE Room
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     description text,
-    ownerId INTEGER REFERENCES User(id)
+    ownerId INTEGER REFERENCES Account(id)
 );
 
 CREATE TABLE SensorType
