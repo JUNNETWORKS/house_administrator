@@ -31,22 +31,22 @@ CREATE TABLE sensor_types
 CREATE TABLE sensors
 (
     id SERIAL PRIMARY KEY,
-    sensorType INTEGER REFERENCES SensorType(id) NOT NULL,
+    sensor_type INTEGER REFERENCES sensor_types(id) NOT NULL,
     created_at timestamp,
     updated_at timestamp
 );
 
 CREATE TABLE rooms_sensors
 (
-    roomId INTEGER REFERENCES Room(id),
-    sensorId INTEGER REFERENCES Sensor(id),
-    PRIMARY KEY(roomId, sensorId)
+    room_id INTEGER REFERENCES rooms(id),
+    sensor_id INTEGER REFERENCES sensors(id),
+    PRIMARY KEY(room_id, sensor_id)
 );
 
-CREATE TABLE Measurement
+CREATE TABLE measurements
 (
     id SERIAL PRIMARY KEY,
-    sensorId INTEGER REFERENCES Sensor(id) NOT NULL,
+    sensor_id INTEGER REFERENCES sensors(id) NOT NULL,
     value real NOT NULL,
     created_at timestamp,
     updated_at timestamp
