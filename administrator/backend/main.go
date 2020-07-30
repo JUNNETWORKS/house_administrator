@@ -8,43 +8,57 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+func dummyHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	fmt.Fprintf(w, "[%s] Response for you :)", time.Now().Format(time.RFC3339Nano))
+}
+
 func main() {
 
 	// マルチプレクサにはhttprouterを使う
 	mux := httprouter.New()
 
-	// 利用可能な部屋を返す
-	mux.GET("/rooms", func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-		fmt.Fprintf(w, "[%s] Response all rooms", time.Now().Format(time.RFC3339Nano))
-	})
-	// 部屋のトップページを返す
-	mux.GET("/rooms/:room", func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-		roomName := p.ByName("room")
-		fmt.Fprintf(w, "[%s] This room name is %s", time.Now().Format(time.RFC3339Nano), roomName)
-	})
+	// 部屋一覧
+	mux.GET("/rooms", dummyHandler)  // 利用可能な部屋
+	mux.POST("/rooms", dummyHandler) // 部屋を追加
+
+	// 特定の部屋の操作
+	mux.GET("/rooms/:roomId", dummyHandler)    // 部屋のトップページ
+	mux.PUT("/rooms/:roomId", dummyHandler)    // 部屋の情報を更新
+	mux.DELETE("/rooms/:roomId", dummyHandler) // 部屋を削除
+
+	// センサー関連
+	mux.GET("/rooms/:roomId/sensors", dummyHandler)  // 搭載されている全センサー
+	mux.POST("/rooms/:roomId/sensors", dummyHandler) // センサーを追加
+
+	// 特定のセンサーの操作
+	mux.GET("/rooms/:roomId/sensors/:sensorId", dummyHandler)    // 特定のセンサーに関する情報
+	mux.PUT("/rooms/:roomId/sensors/:sensorId", dummyHandler)    // 特定のセンサーを更新
+	mux.DELETE("/rooms/:roomId/sensors/:sensorId", dummyHandler) // 特定のセンサーを削除
+
+	// 特定のセンサーの記録
+	mux.GET("/rooms/:roomId/sensors/:sensorId/measurements", dummyHandler)  // 特定のセンサーの全記録を返す
+	mux.POST("/rooms/:roomId/sensors/:sensorId/measurements", dummyHandler) // 特定のセンサーの記録を記録
+
+	// コントローラー関係
+	mux.GET("/rooms/:roomId/controllers", dummyHandler)  // 利用可能な全コントローラー
+	mux.POST("/rooms/:roomId/controllers", dummyHandler) // コントローラーを追加
+
+	// 特定のコントローラーの操作
+	mux.GET("/rooms/:roomId/controllers/:controllerId", dummyHandler) // コントローラーの情報
+
+	// 特定のコントローラーのコマンド
+	mux.GET("/rooms/:roomId/controllers/:controllerId/commands", dummyHandler)  // コマンド一覧
+	mux.POST("/rooms/:roomId/controllers/:controllerId/commands", dummyHandler) // コマンドを追加
+
+	// 特定のコントローラーの特定のコマンド
+	mux.GET("/rooms/:roomId/controllers/:controllerId/commands/:commandId", dummyHandler)    // コマンドの情報
+	mux.POST("/rooms/:roomId/controllers/:controllerId/commands/:commandId", dummyHandler)   // コマンド実行
+	mux.PUT("/rooms/:roomId/controllers/:controllerId/commands/:commandId", dummyHandler)    // コマンドを更新
+	mux.DELETE("/rooms/:roomId/controllers/:controllerId/commands/:commandId", dummyHandler) // コマンドを削除
 
 	server := http.Server{
 		Addr:    "127.0.0.1:8080",
 		Handler: mux,
 	}
 	server.ListenAndServe()
-
-	// TODO: ここから下も修正する
-
-	// // 利用可能な操作を返す
-	// r.GET("/rooms/:room/controllers", func(c *gin.Context) {})
-	// // エアコンの操作に関する情報を返す (操作出来る項目や値の範囲など)
-	// r.GET("/rooms/:room/controllers/air-conditioner", func(c *gin.Context) {
-	// 	roomName := c.Param("room")
-	// 	fmt.Printf("%s", roomName)
-	// })
-	// // エアコンに対して何かしらの操作を送信するAPI
-	// r.POST("/rooms/:room/controllers/air-conditioner", func(c *gin.Context) {})
-	// // 将来的には以下の行の形式に置き換わる予定
-	// r.GET("/rooms/:room/controllers/*device", func(c *gin.Context) {})
-	// r.POST("/rooms/:room/controllers/*device", func(c *gin.Context) {})
-	// // 利用可能な計測値の種類を返す (温度や湿度,CO2濃度など)
-	// r.GET("/rooms/:room/measurements", func(c *gin.Context) {})
-	// // 部屋の温度の詳細やグラフを表示するページを返す
-	// r.GET("/rooms/:room/measurements/temp", func(c *gin.Context) {})
 }
