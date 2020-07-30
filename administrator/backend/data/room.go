@@ -15,14 +15,14 @@ type Room struct {
 }
 
 func Rooms() (rooms []Room, err error) {
-	rows, err := Db.Query("SELECT id, name, description, owner_id, created_at, updated_at FROM Rooms")
+	rows, err := Db.Queryx("SELECT * FROM rooms")
 	if err != nil {
 		log.Print("Failed get all rooms")
 		return
 	}
 	for rows.Next() {
 		var room Room
-		err = rows.Scan(room.Id, room.Name, room.Description, room.OwnerId, room.CreatedAt, room.UpdatedAt)
+		err = rows.StructScan(&room)
 		if err != nil {
 			return
 		}
