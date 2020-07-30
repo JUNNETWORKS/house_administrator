@@ -6,12 +6,12 @@ import (
 )
 
 type Room struct {
-	Id          int
-	Name        string
-	Description string
-	OwnerId     int
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
+	Id          int       `db:id`
+	Name        string    `db:name`
+	Description string    `db:description`
+	OwnerId     int       `db:owner_id`
+	CreatedAt   time.Time `db:created_at`
+	UpdatedAt   time.Time `db:updated_at`
 }
 
 func Rooms() (rooms []Room, err error) {
