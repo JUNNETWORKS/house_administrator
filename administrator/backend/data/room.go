@@ -17,6 +17,7 @@ type Room struct {
 func Rooms() (rooms []Room, err error) {
 	rows, err := Db.Queryx("SELECT * FROM rooms")
 	if err != nil {
+		// TODO: エラーログの出し方を考える
 		log.Print("Failed get all rooms")
 		return
 	}
