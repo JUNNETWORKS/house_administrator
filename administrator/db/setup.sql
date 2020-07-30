@@ -64,6 +64,7 @@ CREATE TABLE controllers
 (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
+    description TEXT,
     controller_type_id INTEGER REFERENCES controller_types(id) NOT NULL,
     created_at timestamp,
     updated_at timestamp
