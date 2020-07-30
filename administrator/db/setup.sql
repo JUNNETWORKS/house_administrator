@@ -31,7 +31,7 @@ CREATE TABLE sensor_types
 CREATE TABLE sensors
 (
     id SERIAL PRIMARY KEY,
-    sensor_type INTEGER REFERENCES sensor_types(id) NOT NULL,
+    sensor_type_id INTEGER REFERENCES sensor_types(id) NOT NULL,
     created_at timestamp,
     updated_at timestamp
 );
