@@ -15,7 +15,7 @@ CREATE TABLE rooms
 (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    description text,
+    description TEXT,
     owner_id INTEGER REFERENCES accounts(id),
     created_at timestamp,
     updated_at timestamp
