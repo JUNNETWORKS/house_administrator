@@ -8,3 +8,9 @@ type Sensor struct {
 	CreatedAt    time.Time
 	UpdatedAt    time.Time
 }
+
+type SensorType struct {
+	Id   int
+	Name string
+	Unit string
+}
