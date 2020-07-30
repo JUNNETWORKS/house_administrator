@@ -51,3 +51,37 @@ CREATE TABLE measurements
     created_at timestamp,
     updated_at timestamp
 );
+
+CREATE TABLE controller_types
+(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    created_at timestamp,
+    updated_at timestamp
+);
+
+CREATE TABLE controllers
+(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    controller_type_id INTEGER REFERENCES controller_types(id) NOT NULL,
+    created_at timestamp,
+    updated_at timestamp
+);
+
+CREATE TABLE rooms_controllers
+(
+    room_id INTEGER REFERENCES rooms(id),
+    controller_id INTEGER REFERENCES controllers(id),
+    PRIMARY KEY(room_id, controller_id)
+);
+
+CREATE TABLE commands
+(
+    id SERIAL PRIMARY KEY,
+    controller_id INTEGER REFERENCES controllers(id),
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    created_at timestamp,
+    updated_at timestamp
+);
