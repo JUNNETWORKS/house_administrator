@@ -2,8 +2,11 @@ version: "3"
 services:
   db:
     image: postgres:12.3
+    container_name: postgres_admin
     restart: always
     volumes:
       - ./db/setup.sql:/docker-entrypoint-initdb.d/setup.sql
+    ports:
+      - 1919:5432
     environment:
-      - POSTGRES_PASSWORD=postgres
+      POSTGRES_PASSWORD: admin
