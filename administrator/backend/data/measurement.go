@@ -1,7 +1,6 @@
 package data
 
 import (
-	"github.com/jmoiron/sqlx"
 	"log"
 	"time"
 )
@@ -14,7 +13,7 @@ type Measurement struct {
 	UpdatedAt time.Time
 }
 
-func Measurements() (measurements []Measurements, err error) {
+func Measurements() (measurements []Measurement, err error) {
 	rows, err := Db.Queryx("SELECT * FROM measurements")
 	if err != nil {
 		log.Println("Failed to get all measurements")
