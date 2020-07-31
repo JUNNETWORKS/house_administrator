@@ -2,11 +2,16 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"time"
 
 	"github.com/julienschmidt/httprouter"
 )
+
+func init() {
+	log.SetFlags(log.Ldate | log.Lshortfile)
+}
 
 func dummyHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	fmt.Fprintf(w, "[%s] Response for you :)", time.Now().Format(time.RFC3339Nano))
