@@ -2,7 +2,7 @@ package data
 
 import "time"
 
-type Account struct {
+type User struct {
 	Id        int
 	Name      string
 	CreatedAt time.Time
