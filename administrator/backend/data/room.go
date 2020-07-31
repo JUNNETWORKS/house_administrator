@@ -14,6 +14,7 @@ type Room struct {
 	UpdatedAt   time.Time `db:updated_at`
 }
 
+// 全部屋のデータをDBから取得し,返す
 func Rooms() (rooms []Room, err error) {
 	rows, err := Db.Queryx("SELECT * FROM rooms")
 	if err != nil {
