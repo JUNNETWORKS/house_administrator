@@ -14,3 +14,8 @@ type SensorType struct {
 	Name string
 	Unit string
 }
+
+func Sensors() (sensors []Sensor, err error) {
+	err = Db.Select(&sensors, "SELECT * FROM sensors")
+	return
+}
