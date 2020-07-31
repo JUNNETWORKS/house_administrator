@@ -15,13 +15,14 @@ var Db *sqlx.DB
 func init() {
 	var err error
 	// TODO: DBの名前は変えるかも
+	dbhost := utils.GetEnvWithDefault("DB_HOST", "db")
 	if dbport, ok := os.LookupEnv("DB_PORT"); !ok {
 		dbport = "5432"
 	}
 	if dbname, ok := os.LookupEnv("DB_NAME"); !ok {
 		dbname = "house"
 	}
-	dataSourceName := fmt.Sprintf("port=%s dbname=%s sslmode=disable", dbport, dbname)
+	dataSourceName := fmt.Sprintf("host=%s port=%s dbname=%s sslmode=disable", dbhost, dbport, dbname)
 	Db, err = sqlx.Open("postgres", dataSourceName)
 	if err != nil {
 		log.Fatal(err)
