@@ -24,10 +24,14 @@ func main() {
 	mux := httprouter.New()
 
 	// 部屋一覧
-	mux.GET("/rooms", func(w http.ResponseWriter, r *http.Request, ps Params) {
-		rooms := data.Rooms()
-		for i, v := range rooms {
-			str := fmt.Sprintln("%v", rooms)
+	mux.GET("/rooms", func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		rooms, err := data.Rooms()
+		if err != nil {
+			w.Write([]byte(err.Error()))
+			return
+		}
+		for i, room := range rooms {
+			str := fmt.Sprintln("%d: %v", i, room)
 			w.Write([]byte(str))
 		}
 	})
