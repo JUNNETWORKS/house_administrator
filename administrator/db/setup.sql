@@ -2,7 +2,7 @@
 userは予約語なので使えない
 https://stackoverflow.com/questions/22256124/cannot-create-a-database-table-named-user-in-postgresql
 */
-CREATE TABLE accounts
+CREATE TABLE users
 (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE rooms
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     description TEXT,
-    owner_id INTEGER REFERENCES accounts(id),
+    owner_id INTEGER REFERENCES users(id),
     created_at timestamp,
     updated_at timestamp
 );
