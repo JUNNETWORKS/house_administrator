@@ -75,7 +75,7 @@ func (room *Room) Update() (err error) {
 	, description = ?
 	, owner_id = ?
 	, updated_at= ?
-	WHERE id = ?
+	WHERE id = ?;
 	`
 	_, err = Db.Exec(schema, room.Name, room.Description, room.OwnerID, room.UpdatedAtDate(), room.ID)
 	return
