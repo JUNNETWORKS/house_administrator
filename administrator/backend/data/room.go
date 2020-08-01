@@ -15,6 +15,16 @@ type Room struct {
 	UpdatedAt   time.Time `db:"updated_at"`
 }
 
+// CreatedAtDate はCreatedAt属性を文字列にして返す
+func (room *Room) CreatedAtDate() string {
+	return room.CreatedAt.Format(time.RFC3339)
+}
+
+// UpdatedAtDate はUpdatedAt属性を文字列にして返す
+func (room *Room) UpdatedAtDate() string {
+	return room.UpdatedAt.Format(time.RFC3339)
+}
+
 // Rooms は全部屋のデータをDBから取得し,返す関数.
 func Rooms() (rooms []Room, err error) {
 	rows, err := Db.Queryx("SELECT * FROM rooms")
@@ -43,12 +53,14 @@ func retrieveRoom(id int) (room *Room, err error) {
 
 // Create DBに挿入する
 func (room *Room) Create() (err error) {
-	now := time.Now().Format(time.RFC3339)
+	now := time.Now()
+	room.CreatedAt = now
+	room.UpdatedAt = now
 	schema := `
 	INSERT INTO rooms
     (name, description, owner_id, created_at, updated_at)
 	VALUES(?, ?, ?, ?, ?);
 	`
-	_, err = Db.Exec(schema, room.Name, room.Description, room.OwnerID, now, now)
+	_, err = Db.Exec(schema, room.Name, room.Description, room.OwnerID, room.CreatedAtDate(), room.UpdatedAtDate())
 	return
 }
