@@ -5,13 +5,14 @@ import (
 	"time"
 )
 
+// Room はDBにおけるroomsテーブルの各行を表す構造体
 type Room struct {
-	Id          int       `db:id`
-	Name        string    `db:name`
-	Description string    `db:description`
-	OwnerId     int       `db:owner_id`
-	CreatedAt   time.Time `db:created_at`
-	UpdatedAt   time.Time `db:updated_at`
+	ID          int       `db:"id"`
+	Name        string    `db:"name"`
+	Description string    `db:"description"`
+	OwnerID     int       `db:"owner_id"`
+	CreatedAt   time.Time `db:"created_at"`
+	UpdatedAt   time.Time `db:"updated_at"`
 }
 
 // Rooms は全部屋のデータをDBから取得し,返す関数

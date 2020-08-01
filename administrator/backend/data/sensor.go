@@ -3,14 +3,14 @@ package data
 import "time"
 
 type Sensor struct {
-	Id           int
-	SensorTypeId int
+	ID           int
+	SensorTypeID int
 	CreatedAt    time.Time
 	UpdatedAt    time.Time
 }
 
 type SensorType struct {
-	Id   int
+	ID   int
 	Name string
 	Unit string
 }

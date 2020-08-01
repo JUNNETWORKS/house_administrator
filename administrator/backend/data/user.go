@@ -3,7 +3,7 @@ package data
 import "time"
 
 type User struct {
-	Id        int
+	ID        int
 	Name      string
 	CreatedAt time.Time
 	UpdatedAt time.Time
