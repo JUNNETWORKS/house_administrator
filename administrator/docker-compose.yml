@@ -19,7 +19,8 @@ services:
     container_name: postgres_admin
     restart: always
     volumes:
-      - ./db/setup.sql:/docker-entrypoint-initdb.d/setup.sql
+      - ./db/setup.sql:/docker-entrypoint-initdb.d/1setup.sql
+      - ./db/data.sql:/docker-entrypoint-initdb.d/2data.sql
     ports:
       - 1919:5432
     environment:
