@@ -1,7 +1,3 @@
-/* 
-userは予約語なので使えない
-https://stackoverflow.com/questions/22256124/cannot-create-a-database-table-named-user-in-postgresql
-*/
 CREATE TABLE users
 (
     id SERIAL PRIMARY KEY,
