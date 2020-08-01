@@ -23,6 +23,8 @@ func main() {
 	// マルチプレクサにはhttprouterを使う
 	mux := httprouter.New()
 
+	mux.GET("/", dummyHandler)
+
 	// 部屋一覧
 	mux.GET("/rooms", func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		rooms, err := data.Rooms()
@@ -74,7 +76,7 @@ func main() {
 	mux.DELETE("/rooms/:roomId/controllers/:controllerId/commands/:commandId", dummyHandler) // コマンドを削除
 
 	server := http.Server{
-		Addr:    "127.0.0.1:8080",
+		Addr:    "0.0.0.0:8080",
 		Handler: mux,
 	}
 	server.ListenAndServe()
