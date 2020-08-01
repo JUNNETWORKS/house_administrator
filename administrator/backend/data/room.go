@@ -15,7 +15,7 @@ type Room struct {
 	UpdatedAt   time.Time `db:"updated_at"`
 }
 
-// Rooms は全部屋のデータをDBから取得し,返す関数
+// Rooms は全部屋のデータをDBから取得し,返す関数.
 func Rooms() (rooms []Room, err error) {
 	rows, err := Db.Queryx("SELECT * FROM rooms")
 	if err != nil {
@@ -32,5 +32,11 @@ func Rooms() (rooms []Room, err error) {
 		rooms = append(rooms, room)
 	}
 	rows.Close()
+	return
+}
+
+// retrieveRoom はidのRoomを取得して返す.
+func retrieveRoom(id int) (room *Room, err error) {
+	err = Db.Select(&room, "SELECT * FROM rooms WHERE id = ?", id)
 	return
 }
