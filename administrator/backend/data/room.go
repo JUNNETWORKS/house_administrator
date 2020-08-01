@@ -40,3 +40,15 @@ func retrieveRoom(id int) (room *Room, err error) {
 	err = Db.Select(&room, "SELECT * FROM rooms WHERE id = ?", id)
 	return
 }
+
+// Create DBに挿入する
+func (room *Room) Create() (err error) {
+	now := time.Now().Format(time.RFC3339)
+	schema := `
+	INSERT INTO rooms
+    (name, description, owner_id, created_at, updated_at)
+	VALUES(?, ?, ?, ?, ?);
+	`
+	_, err = Db.Exec(schema, room.Name, room.Description, room.OwnerID, now, now)
+	return
+}
