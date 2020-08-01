@@ -80,3 +80,13 @@ func (room *Room) Update() (err error) {
 	_, err = Db.Exec(schema, room.Name, room.Description, room.OwnerID, room.UpdatedAtDate(), room.ID)
 	return
 }
+
+// Delete Room構造体を元に
+func (room *Room) Delete() (err error) {
+	schema := `
+	DELETE FROM rooms
+	WHERE id = ?;
+	`
+	_, err = Db.Exec(schema, room.ID)
+	return err
+}
