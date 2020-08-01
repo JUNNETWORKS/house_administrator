@@ -64,3 +64,19 @@ func (room *Room) Create() (err error) {
 	_, err = Db.Exec(schema, room.Name, room.Description, room.OwnerID, room.CreatedAtDate(), room.UpdatedAtDate())
 	return
 }
+
+// Update Room構造体の情報を元に
+func (room *Room) Update() (err error) {
+	now := time.Now()
+	room.UpdatedAt = now
+	schema := `
+	UPDATE rooms
+	SET name = ?
+	, description = ?
+	, owner_id = ?
+	, updated_at= ?
+	WHERE id = ?
+	`
+	_, err = Db.Exec(schema, room.Name, room.Description, room.OwnerID, room.UpdatedAtDate(), room.ID)
+	return
+}
