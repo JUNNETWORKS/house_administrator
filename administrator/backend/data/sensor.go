@@ -4,10 +4,10 @@ import "time"
 
 // Sensor ... センサー情報を表す構造体
 type Sensor struct {
-	ID           int
-	SensorTypeID int
-	CreatedAt    time.Time
-	UpdatedAt    time.Time
+	ID         int
+	SensorType *SensorType
+	CreatedAt  time.Time
+	UpdatedAt  time.Time
 }
 
 // SensorType ... センサーの種類を表す構造体
