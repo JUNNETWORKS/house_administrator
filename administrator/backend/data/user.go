@@ -9,7 +9,8 @@ type User struct {
 	UpdatedAt time.Time
 }
 
-func Users() (users []User, err error) {
-	err = Db.Select(&users, "SELECT * FROM users")
-	return
+func Users() ([]User, error) {
+	var users []User
+	err := Db.Select(&users, "SELECT * FROM users")
+	return users, err
 }

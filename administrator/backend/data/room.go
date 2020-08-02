@@ -46,13 +46,14 @@ func Rooms() (rooms []Room, err error) {
 }
 
 // retrieveRoom はidのRoomを取得して返す.
-func retrieveRoom(id int) (room *Room, err error) {
-	err = Db.Select(&room, "SELECT * FROM rooms WHERE id = ?", id)
-	return
+func retrieveRoom(id int) (*Room, error) {
+	var room Room
+	err := Db.Select(&room, "SELECT * FROM rooms WHERE id = ?", id)
+	return &room, err
 }
 
 // Create DBに挿入する
-func (room *Room) Create() (err error) {
+func (room *Room) Create() error {
 	now := time.Now()
 	room.CreatedAt = now
 	room.UpdatedAt = now
@@ -61,12 +62,12 @@ func (room *Room) Create() (err error) {
     (name, description, owner_id, created_at, updated_at)
 	VALUES(?, ?, ?, ?, ?);
 	`
-	_, err = Db.Exec(schema, room.Name, room.Description, room.OwnerID, room.CreatedAtDate(), room.UpdatedAtDate())
-	return
+	_, err := Db.Exec(schema, room.Name, room.Description, room.OwnerID, room.CreatedAtDate(), room.UpdatedAtDate())
+	return err
 }
 
 // Update Room構造体の情報を元に
-func (room *Room) Update() (err error) {
+func (room *Room) Update() error {
 	now := time.Now()
 	room.UpdatedAt = now
 	schema := `
@@ -77,16 +78,16 @@ func (room *Room) Update() (err error) {
 	, updated_at= ?
 	WHERE id = ?;
 	`
-	_, err = Db.Exec(schema, room.Name, room.Description, room.OwnerID, room.UpdatedAtDate(), room.ID)
-	return
+	_, err := Db.Exec(schema, room.Name, room.Description, room.OwnerID, room.UpdatedAtDate(), room.ID)
+	return err
 }
 
 // Delete Room構造体を元に
-func (room *Room) Delete() (err error) {
+func (room *Room) Delete() error {
 	schema := `
 	DELETE FROM rooms
 	WHERE id = ?;
 	`
-	_, err = Db.Exec(schema, room.ID)
+	_, err := Db.Exec(schema, room.ID)
 	return err
 }

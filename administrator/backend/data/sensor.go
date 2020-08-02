@@ -15,7 +15,8 @@ type SensorType struct {
 	Unit string
 }
 
-func Sensors() (sensors []Sensor, err error) {
-	err = Db.Select(&sensors, "SELECT * FROM sensors")
-	return
+func Sensors() ([]Sensor, error) {
+	var sensors []Sensor
+	err := Db.Select(&sensors, "SELECT * FROM sensors")
+	return sensors, err
 }
