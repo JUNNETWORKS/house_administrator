@@ -13,19 +13,20 @@ type Measurement struct {
 	UpdatedAt time.Time
 }
 
-func Measurements() (measurements []Measurement, err error) {
+func Measurements() ([]Measurement, error) {
 	rows, err := Db.Queryx("SELECT * FROM measurements")
 	if err != nil {
 		log.Println("Failed to get all measurements")
-		return
+		return nil, err
 	}
+	var measurements []Measurement
 	for rows.Next() {
 		var measurement Measurement
 		err = rows.StructScan(&measurement)
 		if err != nil {
-			return
+			return nil, err
 		}
 		measurements = append(measurements, measurement)
 	}
-	return
+	return measurements, nil
 }
