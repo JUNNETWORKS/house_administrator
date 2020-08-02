@@ -5,14 +5,16 @@ import (
 	"time"
 )
 
+// Measurement ... 計測データを表す構造体
 type Measurement struct {
-	Id        int
-	SensorId  int
+	ID        int
+	SensorID  int
 	Value     float64
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
 
+// Measurements ... 全計測データを取得する
 func Measurements() ([]Measurement, error) {
 	rows, err := Db.Queryx("SELECT * FROM measurements")
 	if err != nil {
