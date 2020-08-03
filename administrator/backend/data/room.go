@@ -93,6 +93,16 @@ func (room *Room) Delete() error {
 	return err
 }
 
+// DeleteByID ... IDのRoomをテーブルから削除
+func DeleteByID(id int) error {
+	schema := `
+	DELETE FROM rooms
+	WHERE id = ?;
+	`
+	_, err := Db.Exec(schema, id)
+	return err
+}
+
 // DeleteRoomAll ... roomsテーブルの全てのレコードを削除する
 // テストでのみの利用を想定している
 func DeleteRoomAll() error {
