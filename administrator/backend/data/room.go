@@ -7,12 +7,12 @@ import (
 
 // Room はDBにおけるroomsテーブルの各行を表す構造体
 type Room struct {
-	ID          int       `db:"id"`
-	Name        string    `db:"name"`
-	Description string    `db:"description"`
-	OwnerID     int       `db:"owner_id"`
-	CreatedAt   time.Time `db:"created_at"`
-	UpdatedAt   time.Time `db:"updated_at"`
+	ID          int       `db:"id" json:"id"`
+	Name        string    `db:"name" json:"name"`
+	Description string    `db:"description" json:"description"`
+	OwnerID     int       `db:"owner_id" json:"owner_id"`
+	CreatedAt   time.Time `db:"created_at" json:"created_at"`
+	UpdatedAt   time.Time `db:"updated_at" json:"updated_at"`
 }
 
 // CreatedAtDate はCreatedAt属性を文字列にして返す
