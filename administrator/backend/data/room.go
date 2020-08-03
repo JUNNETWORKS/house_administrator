@@ -25,8 +25,8 @@ func (room *Room) UpdatedAtDate() string {
 	return room.UpdatedAt.Format(time.RFC3339)
 }
 
-// Rooms は全部屋のデータをDBから取得し,返す関数.
-func Rooms() (rooms []Room, err error) {
+// GetRooms は全部屋のデータをDBから取得し,返す関数.
+func GetRooms() (rooms []Room, err error) {
 	rows, err := Db.Queryx("SELECT * FROM rooms")
 	if err != nil {
 		// TODO: エラーログの出し方を考える
