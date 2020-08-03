@@ -26,23 +26,24 @@ func (room *Room) UpdatedAtDate() string {
 }
 
 // GetRooms は全部屋のデータをDBから取得し,返す関数.
-func GetRooms() (rooms []Room, err error) {
+func GetRooms() ([]Room, error) {
+	var rooms []Room
 	rows, err := Db.Queryx("SELECT * FROM rooms")
 	if err != nil {
 		// TODO: エラーログの出し方を考える
 		log.Println("Failed get all rooms")
-		return
+		return nil, err
 	}
 	for rows.Next() {
 		var room Room
 		err = rows.StructScan(&room)
 		if err != nil {
-			return
+			return nil, err
 		}
 		rooms = append(rooms, room)
 	}
 	rows.Close()
-	return
+	return rooms, nil
 }
 
 // RetrieveRoom はidのRoomを取得して返す.
