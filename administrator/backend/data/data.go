@@ -2,8 +2,9 @@ package data
 
 import (
 	"fmt"
-	"github.com/JUNNETWORKS/house_administrator/utils"
 	"log"
+
+	"github.com/JUNNETWORKS/house_administrator/utils"
 
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
