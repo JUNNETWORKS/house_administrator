@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/JUNNETWORKS/house_administrator/data"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/JUNNETWORKS/house_administrator/handlers"
 
 	"github.com/julienschmidt/httprouter"
 )
@@ -26,17 +27,7 @@ func main() {
 	mux.GET("/", dummyHandler)
 
 	// 部屋一覧
-	mux.GET("/rooms", func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-		rooms, err := data.Rooms()
-		if err != nil {
-			w.Write([]byte(err.Error()))
-			return
-		}
-		for i, room := range rooms {
-			str := fmt.Sprintln("%d: %v", i, room)
-			w.Write([]byte(str))
-		}
-	})
+	mux.GET("/rooms", handlers.GetRooms)
 	// 利用可能な部屋
 	mux.POST("/rooms", dummyHandler) // 部屋を追加
 
@@ -79,5 +70,5 @@ func main() {
 		Addr:    "0.0.0.0:8080",
 		Handler: mux,
 	}
-	server.ListenAndServe()
+	log.Fatal(server.ListenAndServe())
 }
