@@ -45,8 +45,8 @@ func GetRooms() (rooms []Room, err error) {
 	return
 }
 
-// retrieveRoom はidのRoomを取得して返す.
-func retrieveRoom(id int) (*Room, error) {
+// RetrieveRoom はidのRoomを取得して返す.
+func RetrieveRoom(id int) (*Room, error) {
 	var room Room
 	err := Db.Select(&room, "SELECT * FROM rooms WHERE id = ?", id)
 	return &room, err
