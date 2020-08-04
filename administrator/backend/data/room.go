@@ -55,7 +55,7 @@ func GetRooms() ([]Room, error) {
 // RetrieveRoom はidのRoomを取得して返す.
 func RetrieveRoom(id int) (*Room, error) {
 	var room Room
-	err := Db.Select(&room, "SELECT * FROM rooms WHERE id = ?", id)
+	err := Db.Get(&room, "SELECT * FROM rooms WHERE id = $1", id)
 	return &room, err
 }
 
@@ -64,19 +64,25 @@ func (room *Room) Create() error {
 	now := time.Now()
 	room.CreatedAt = now
 	room.UpdatedAt = now
-	schema := `
+	statement := `
 	INSERT INTO rooms
     (name, description, owner_id, created_at, updated_at)
-	VALUES(:name, :description, :owner_id, :created_at, :updated_at);
+	VALUES(:name, :description, :owner_id, :created_at, :updated_at)
+	RETURNING id;
 	`
-	_, err := Db.NamedExec(schema, map[string]interface{}{
+	stmt, err := Db.PrepareNamed(statement)
+	if err != nil {
+		return err
+	}
+	defer stmt.Close()
+	err = stmt.QueryRow(map[string]interface{}{
 		"name":        room.Name,
 		"description": room.Description,
 		"owner_id":    room.OwnerID,
 		"created_at":  room.CreatedAtDate(),
 		"updated_at":  room.UpdatedAtDate(),
-	})
-	return err
+	}).StructScan(room)
+	return nil
 }
 
 // Update Room構造体の情報を元に
