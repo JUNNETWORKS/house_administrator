@@ -27,6 +27,7 @@ func GetRooms(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	if err != nil {
 		log.Println(err)
 	}
+	log.Println("全部屋の情報を取得")
 	w.Write(output)
 }
 
@@ -71,6 +72,7 @@ func RegisterRoom(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		w.Write([]byte(err.Error()))
 		return
 	}
+	log.Printf("RoomID %d の部屋を作成\n", room.ID)
 	w.Write(resJSON)
 }
 
@@ -96,6 +98,7 @@ func GetRoom(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		w.Write([]byte(err.Error()))
 		return
 	}
+	log.Printf("RoomID %d の部屋を取得\n", room.ID)
 	w.Write(resJSON)
 }
 
@@ -161,7 +164,7 @@ func UpdateRoom(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		w.Write([]byte(err.Error()))
 		return
 	}
-	log.Printf("RoomID %d の部屋情報を更新\n", room.ID)
+	log.Printf("RoomID %d の部屋を更新\n", room.ID)
 	w.Write(resJSON)
 }
 
@@ -191,5 +194,5 @@ func DeleteRoom(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 		w.Write([]byte(err.Error()))
 		return
 	}
-	log.Printf("Room ID %d の部屋を削除しました", roomID)
+	log.Printf("RoomID %d の部屋を削除\n", room.ID)
 }
