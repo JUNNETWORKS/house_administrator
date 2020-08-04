@@ -164,3 +164,32 @@ func UpdateRoom(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	log.Printf("RoomID %d の部屋情報を更新\n", room.ID)
 	w.Write(resJSON)
 }
+
+// DeleteRoom ... 部屋を削除する
+func DeleteRoom(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	roomID, err := strconv.Atoi(p.ByName("roomID"))
+	if err != nil {
+		log.Println(err.Error())
+		w.WriteHeader(400)
+		w.Write([]byte(err.Error()))
+		return
+	}
+
+	// 現在の部屋のデータを取得
+	room, err := data.RetrieveRoom(roomID)
+	if err != nil {
+		log.Println(err.Error())
+		w.WriteHeader(404)
+		w.Write([]byte(err.Error()))
+		return
+	}
+
+	err = room.Delete()
+	if err != nil {
+		log.Println(err.Error())
+		w.WriteHeader(500)
+		w.Write([]byte(err.Error()))
+		return
+	}
+	log.Printf("Room ID %d の部屋を削除しました", roomID)
+}
