@@ -91,11 +91,11 @@ func (room *Room) Update() error {
 	room.UpdatedAt = now
 	schema := `
 	UPDATE rooms
-	SET name = ?
-	, description = ?
-	, owner_id = ?
-	, updated_at= ?
-	WHERE id = ?;
+	SET name = $1
+	, description = $2
+	, owner_id = $3
+	, updated_at= $4
+	WHERE id = $5;
 	`
 	_, err := Db.Exec(schema, room.Name, room.Description, room.OwnerID, room.UpdatedAtDate(), room.ID)
 	return err
@@ -105,7 +105,7 @@ func (room *Room) Update() error {
 func (room *Room) Delete() error {
 	schema := `
 	DELETE FROM rooms
-	WHERE id = ?;
+	WHERE id = $1;
 	`
 	_, err := Db.Exec(schema, room.ID)
 	return err
@@ -115,7 +115,7 @@ func (room *Room) Delete() error {
 func DeleteByID(id int) error {
 	schema := `
 	DELETE FROM rooms
-	WHERE id = ?;
+	WHERE id = $1;
 	`
 	_, err := Db.Exec(schema, id)
 	return err
