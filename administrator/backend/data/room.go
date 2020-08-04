@@ -67,9 +67,15 @@ func (room *Room) Create() error {
 	schema := `
 	INSERT INTO rooms
     (name, description, owner_id, created_at, updated_at)
-	VALUES(?, ?, ?, ?, ?);
+	VALUES(:name, :description, :owner_id, :created_at, :updated_at);
 	`
-	_, err := Db.Exec(schema, room.Name, room.Description, room.OwnerID, room.CreatedAtDate(), room.UpdatedAtDate())
+	_, err := Db.NamedExec(schema, map[string]interface{}{
+		"name":        room.Name,
+		"description": room.Description,
+		"owner_id":    room.OwnerID,
+		"created_at":  room.CreatedAtDate(),
+		"updated_at":  room.UpdatedAtDate(),
+	})
 	return err
 }
 
