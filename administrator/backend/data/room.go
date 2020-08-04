@@ -15,6 +15,12 @@ type Room struct {
 	UpdatedAt   time.Time `db:"updated_at" json:"updated_at"`
 }
 
+// NewRoom ... 構造体Roomのポインタを返す
+func NewRoom(name string, description string) *Room {
+	room := &Room{Name: name, Description: description}
+	return room
+}
+
 // CreatedAtDate はCreatedAt属性を文字列にして返す
 func (room *Room) CreatedAtDate() string {
 	return room.CreatedAt.Format(time.RFC3339)
