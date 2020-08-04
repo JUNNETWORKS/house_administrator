@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/JUNNETWORKS/house_administrator/data"
 	"github.com/julienschmidt/httprouter"
@@ -66,6 +67,31 @@ func RegisterRoom(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	resJSON, err := json.MarshalIndent(room, "", "\t")
 	if err != nil {
 		log.Println("新しい部屋についてのJSONを作成出来ませんでした.")
+		log.Println(err.Error())
+		w.Write([]byte(err.Error()))
+		return
+	}
+	w.Write(resJSON)
+}
+
+// GetRoom ... 部屋の情報を取得して返す
+func GetRoom(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	roomID, err := strconv.Atoi(p.ByName("roomID"))
+	if err != nil {
+		log.Println(err.Error())
+		w.Write([]byte(err.Error()))
+		return
+	}
+	room, err := data.RetrieveRoom(roomID)
+	if err != nil {
+		log.Printf("RoomID %d のデータを取得できませんでした.\n", roomID)
+		log.Println(err.Error())
+		w.Write([]byte(err.Error()))
+		return
+	}
+	resJSON, err := json.MarshalIndent(room, "", "\t")
+	if err != nil {
+		log.Printf("RoomID %d のJSONを作成出来ませんでした.\n", roomID)
 		log.Println(err.Error())
 		w.Write([]byte(err.Error()))
 		return
