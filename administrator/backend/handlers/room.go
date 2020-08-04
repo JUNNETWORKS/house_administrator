@@ -98,3 +98,69 @@ func GetRoom(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	}
 	w.Write(resJSON)
 }
+
+// UpdateRoom ... 部屋の情報を更新する
+// 例: descriptionを変更する
+// {
+// 	"description": "let's change description!"
+// }
+func UpdateRoom(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	roomID, err := strconv.Atoi(p.ByName("roomID"))
+	if err != nil {
+		log.Println(err.Error())
+		w.WriteHeader(400)
+		w.Write([]byte(err.Error()))
+		return
+	}
+
+	// 現在の部屋のデータを取得
+	room, err := data.RetrieveRoom(roomID)
+	if err != nil {
+		log.Println(err.Error())
+		w.WriteHeader(404)
+		w.Write([]byte(err.Error()))
+		return
+	}
+
+	// リクエストボディをパースしてJSONを取り出す
+	len := r.ContentLength
+	body := make([]byte, len)
+	_, err = r.Body.Read(body)
+	if err != nil && err.Error() != "EOF" {
+		log.Printf("%s", string(body))
+		log.Println("リクエストが間違っています.")
+		log.Println(err.Error())
+		w.WriteHeader(400)
+		w.Write([]byte(err.Error()))
+		return
+	}
+	// JSONで指定されたデータroomを更新する
+	err = json.Unmarshal(body, &room)
+	if err != nil {
+		log.Println("リクエストボディから構造体にマッピング出来ませんでした.")
+		log.Println(err.Error())
+		w.WriteHeader(400)
+		w.Write([]byte(err.Error()))
+		return
+	}
+
+	// DBに変更を反映する
+	err = room.Update()
+	if err != nil {
+		log.Println("部屋のデータを更新出来ませんでした.")
+		log.Println(err.Error())
+		w.WriteHeader(500)
+		w.Write([]byte(err.Error()))
+		return
+	}
+
+	resJSON, err := json.MarshalIndent(&room, "", "\t")
+	if err != nil {
+		log.Printf("RoomID %d のJSONを作成出来ませんでした.\n", roomID)
+		log.Println(err.Error())
+		w.Write([]byte(err.Error()))
+		return
+	}
+	log.Printf("RoomID %d の部屋情報を更新\n", room.ID)
+	w.Write(resJSON)
+}
