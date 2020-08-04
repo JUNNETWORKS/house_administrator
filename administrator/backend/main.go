@@ -28,8 +28,8 @@ func main() {
 
 	// 部屋一覧
 	mux.GET("/rooms", handlers.GetRooms)
-	// 利用可能な部屋
-	mux.POST("/rooms", dummyHandler) // 部屋を追加
+	// 部屋を追加
+	mux.POST("/rooms", handlers.RegisterRoom)
 
 	// 特定の部屋の操作
 	mux.GET("/rooms/:roomId", dummyHandler)    // 部屋のトップページ
