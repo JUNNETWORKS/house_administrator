@@ -30,6 +30,6 @@ func GetRooms(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	return
 }
 
-func AddRoom(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func RegisterRoom(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	return
 }
