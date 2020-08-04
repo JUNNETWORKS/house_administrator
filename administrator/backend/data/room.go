@@ -85,7 +85,7 @@ func (room *Room) Create() error {
 	return nil
 }
 
-// Update Room構造体の情報を元に
+// Update Room構造体のIDのRoomをRoom構造体の情報を元に更新
 func (room *Room) Update() error {
 	now := time.Now()
 	room.UpdatedAt = now
@@ -101,7 +101,7 @@ func (room *Room) Update() error {
 	return err
 }
 
-// Delete Room構造体を元に
+// Delete Room構造体のIDのRoomをDBから削除
 func (room *Room) Delete() error {
 	schema := `
 	DELETE FROM rooms
