@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 
@@ -64,5 +63,12 @@ func RegisterRoom(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		return
 	}
 	log.Printf("新しい部屋を追加しました\n%v\n", room)
-	fmt.Fprintf(w, "%s: %v", "新しい部屋", room)
+	resJSON, err := json.MarshalIndent(room, "", "\t")
+	if err != nil {
+		log.Println("新しい部屋についてのJSONを作成出来ませんでした.")
+		log.Println(err.Error())
+		w.Write([]byte(err.Error()))
+		return
+	}
+	w.Write(resJSON)
 }
