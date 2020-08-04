@@ -32,9 +32,9 @@ func main() {
 	mux.POST("/rooms", handlers.RegisterRoom)
 
 	// 特定の部屋の操作
-	mux.GET("/rooms/:roomID", handlers.GetRoom)    // 部屋のトップページ
-	mux.PUT("/rooms/:roomID", handlers.UpdateRoom) // 部屋の情報を更新
-	mux.DELETE("/rooms/:roomID", dummyHandler)     // 部屋を削除
+	mux.GET("/rooms/:roomID", handlers.GetRoom)       // 部屋のトップページ
+	mux.PUT("/rooms/:roomID", handlers.UpdateRoom)    // 部屋の情報を更新
+	mux.DELETE("/rooms/:roomID", handlers.DeleteRoom) // 部屋を削除
 
 	// センサー関連
 	mux.GET("/rooms/:roomID/sensors", dummyHandler)  // 搭載されている全センサー
