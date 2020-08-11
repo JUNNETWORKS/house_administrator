@@ -11,6 +11,7 @@ type Room struct {
 	Name        string    `db:"name" json:"name"`
 	Description string    `db:"description" json:"description"`
 	OwnerID     int       `db:"owner_id" json:"owner_id"`
+	Sensors     []Sensor  `json:"sensors"`
 	CreatedAt   time.Time `db:"created_at" json:"created_at"`
 	UpdatedAt   time.Time `db:"updated_at" json:"updated_at"`
 }
