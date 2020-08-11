@@ -5,6 +5,7 @@ import "time"
 // Sensor ... センサー情報を表す構造体
 type Sensor struct {
 	ID         int
+	Room       *Room `json:"-"`
 	SensorType *SensorType
 	CreatedAt  time.Time
 	UpdatedAt  time.Time
