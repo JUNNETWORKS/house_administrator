@@ -46,15 +46,16 @@ func main() {
 	mux.DELETE("/rooms/:roomID/sensors/:sensorID", handlers.DeleteSensor) // 特定のセンサーを削除
 
 	// 特定のセンサーの記録
-	mux.GET("/rooms/:roomID/sensors/:sensorID/measurements", dummyHandler)  // 特定のセンサーの全記録を返す
-	mux.POST("/rooms/:roomID/sensors/:sensorID/measurements", dummyHandler) // 特定のセンサーの記録を記録
+	mux.GET("/rooms/:roomID/sensors/:sensorID/measurements", handlers.GetMeasurements)      // 特定のセンサーの記録を返す
+	mux.POST("/rooms/:roomID/sensors/:sensorID/measurements", handlers.RegisterMeasurement) // 特定のセンサーの記録を記録
+	mux.GET("/rooms/:roomID/sensors/:sensorID/latest", handlers.GetLatestMeasurement)       // 特定のセンサーの最新の記録を返す
 
 	// コントローラー関係
 	mux.GET("/rooms/:roomID/controllers", dummyHandler)  // 利用可能な全コントローラー
 	mux.POST("/rooms/:roomID/controllers", dummyHandler) // コントローラーを追加
 
 	// 特定のコントローラーの操作
-	mux.GET("/rooms/:roomID/controllers/:controllerID", dummyHandler) // コントローラーの情報
+	mux.GET("/rooms/:roomID/controllers/:controllerID", dummyHandler) // コントローラーの情報や利用可能なコマンドを返す
 
 	// 特定のコントローラーのコマンド
 	mux.GET("/rooms/:roomID/controllers/:controllerID/commands", dummyHandler)  // コマンド一覧
