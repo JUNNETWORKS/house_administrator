@@ -51,11 +51,11 @@ func main() {
 	mux.GET("/rooms/:roomID/sensors/:sensorID/latest", handlers.GetLatestMeasurement)       // 特定のセンサーの最新の記録を返す
 
 	// コントローラー関係
-	mux.GET("/rooms/:roomID/controllers", dummyHandler)  // 利用可能な全コントローラー
-	mux.POST("/rooms/:roomID/controllers", dummyHandler) // コントローラーを追加
+	mux.GET("/rooms/:roomID/controllers", handlers.GetAllControllersInRoom) // 利用可能な全コントローラー
+	mux.POST("/rooms/:roomID/controllers", handlers.RegisterController)     // コントローラーを追加
 
-	// 特定のコントローラーの操作
-	mux.GET("/rooms/:roomID/controllers/:controllerID", dummyHandler) // コントローラーの情報や利用可能なコマンドを返す
+	// 特定のコントローラーの情報を取得
+	mux.GET("/rooms/:roomID/controllers/:controllerID", handlers.GetController) // コントローラーの情報や利用可能なコマンドを返す
 
 	// 特定のコントローラーのコマンド
 	mux.GET("/rooms/:roomID/controllers/:controllerID/commands", dummyHandler)  // コマンド一覧
@@ -65,7 +65,7 @@ func main() {
 	mux.GET("/rooms/:roomID/controllers/:controllerID/commands/:commandID", dummyHandler)    // コマンドの情報
 	mux.POST("/rooms/:roomID/controllers/:controllerID/commands/:commandID", dummyHandler)   // コマンド実行
 	mux.PUT("/rooms/:roomID/controllers/:controllerID/commands/:commandID", dummyHandler)    // コマンドを更新
-	mux.DELETE("/rooms/:roomID/controllers/:controllerID/commands/:commandId", dummyHandler) // コマンドを削除
+	mux.DELETE("/rooms/:roomID/controllers/:controllerID/commands/:commandID", dummyHandler) // コマンドを削除
 
 	server := http.Server{
 		Addr:    "0.0.0.0:8080",
