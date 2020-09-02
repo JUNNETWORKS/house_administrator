@@ -58,8 +58,8 @@ func main() {
 	mux.GET("/rooms/:roomID/controllers/:controllerID", handlers.GetController) // コントローラーの情報や利用可能なコマンドを返す
 
 	// 特定のコントローラーのコマンド
-	mux.GET("/rooms/:roomID/controllers/:controllerID/commands", dummyHandler)  // コマンド一覧
-	mux.POST("/rooms/:roomID/controllers/:controllerID/commands", dummyHandler) // コマンドを追加
+	mux.GET("/rooms/:roomID/controllers/:controllerID/commands", handlers.GetControllerCommands) // コマンド一覧
+	mux.POST("/rooms/:roomID/controllers/:controllerID/commands", handlers.RegisterCommand)      // コマンドを追加
 
 	// 特定のコントローラーの特定のコマンド
 	mux.GET("/rooms/:roomID/controllers/:controllerID/commands/:commandID", dummyHandler)    // コマンドの情報
