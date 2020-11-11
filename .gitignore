@@ -1,5 +1,6 @@
 # editor
 .vscode/
+.vim/
 
 # python cache
 __pycache__/
