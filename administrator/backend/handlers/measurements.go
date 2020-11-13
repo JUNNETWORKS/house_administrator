@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/julienschmidt/httprouter"
+	"github.com/gin-gonic/gin"
 )
 
 // TODO: GetMeasurements ... センサーIDで指定されたセンサーで取得したデータを指定された期間分取得する
@@ -26,7 +26,7 @@ GET /rooms/1/sensors/25/measurements?from=2020-08-12T00:00:00&until=2020-08-14T0
 	]
 }
 */
-func GetMeasurements(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func GetMeasurements(c *gin.Context) {
 }
 
 // TODO: GetLatestMeasurement ... 特定のセンサーの最新の記録を返す
@@ -46,7 +46,7 @@ GET /rooms/1/sensors/25/measurements/latest
 		}
 }
 */
-func GetLatestMeasurement(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func GetLatestMeasurement(c *gin.Context) {
 }
 
 // TODO: RegisterMeasurement ... 特定のセンサーの記録を記録
@@ -64,6 +64,6 @@ POST /rooms/1/sensors/25/measurements
 成功したらステータスコード200を返す.
 エラーの場合は相応のステータスコードとボディにエラーメッセージ
 */
-func RegisterMeasurement(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func RegisterMeasurement(c *gin.Context) {
 
 }

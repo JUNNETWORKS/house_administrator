@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/julienschmidt/httprouter"
+	"github.com/gin-gonic/gin"
 )
 
 // TODO:  GetControllerCommands ... 特定のコントローラーの全てのコマンドを取得
@@ -20,7 +20,7 @@ import (
 	]
 }
 */
-func GetControllerCommands(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func GetControllerCommands(c *gin.Context) {
 
 }
 
@@ -35,6 +35,6 @@ func GetControllerCommands(w http.ResponseWriter, r *http.Request, _ httprouter.
 	"command_id": 42
 }
 */
-func RegisterCommand(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func RegisterCommand(c *gin.Context) {
 
 }
