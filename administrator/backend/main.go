@@ -7,6 +7,8 @@ import (
 	"time"
 
 	"github.com/JUNNETWORKS/house_administrator/handlers"
+	"io"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -21,9 +23,37 @@ func dummyHandler(c *gin.Context) {
 
 func main() {
 
-	// マルチプレクサにはhttprouterを使う
-	router := gin.Default()
+	// マルチプレクサにはginを使う
+	// gin.New() はミドルウェアが何も入っていないまっさらなginEngineを返す
+	router := gin.New()
 
+	// Setting Logger with custom format
+	router.Use(gin.LoggerWithFormatter(func(param gin.LogFormatterParams) string {
+		// your custom format
+		return fmt.Sprintf("%s - [%s] \"%s %s %s %d %s \"%s\" %s\"\n",
+			param.ClientIP,
+			param.TimeStamp.Format(time.RFC1123),
+			param.Method,
+			param.Path,
+			param.Request.Proto,
+			param.StatusCode,
+			param.Latency,
+			param.Request.UserAgent(),
+			param.ErrorMessage,
+		)
+	}))
+	// Logging to a file.
+	f, _ := os.Create("gin.log")
+	// Write the logs to file and console at the same time.
+	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
+	// Disable Console Color, you don't need console color when writing the logs to file.
+	// gin.DisableConsoleColor()
+	gin.ForceConsoleColor()
+
+	// Recovery middleware recovers from any panics and writes a 500 if there was one.
+	router.Use(gin.Recovery())
+
+	/* 以下ルーティング情報 */
 	router.GET("/", dummyHandler)
 
 	// 部屋一覧
@@ -67,9 +97,5 @@ func main() {
 	router.PUT("/rooms/:roomID/controllers/:controllerID/commands/:commandID", dummyHandler)    // コマンドを更新
 	router.DELETE("/rooms/:roomID/controllers/:controllerID/commands/:commandID", dummyHandler) // コマンドを削除
 
-	server := http.Server{
-		Addr:    "0.0.0.0:8080",
-		Handler: router,
-	}
-	log.Fatal(server.ListenAndServe())
+	log.Fatal(router.Run(":8080"))
 }
