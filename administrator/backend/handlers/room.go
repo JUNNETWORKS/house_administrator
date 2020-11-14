@@ -11,7 +11,7 @@ import (
 )
 
 // Binding from JSON
-type NewRoom struct {
+type RequestRoomBody struct {
 	Name        string `json:"name" binding:"required"`
 	Description string `json:"description" binding:"-"`
 }
@@ -43,7 +43,7 @@ func GetRooms(c *gin.Context) {
 // }
 func RegisterRoom(c *gin.Context) {
 	var err error
-	var newRoom *NewRoom
+	var newRoom *RequestRoomBody
 	if err = c.BindJSON(newRoom); err != nil {
 		log.Println("リクエストが間違っています.")
 		log.Println("リクエストボディから構造体にマッピング出来ませんでした.")
@@ -69,25 +69,18 @@ func GetRoom(c *gin.Context) {
 	roomID, err := strconv.Atoi(c.Param("roomID"))
 	if err != nil {
 		log.Println(err.Error())
-		c.Writer.Write([]byte(err.Error()))
+		c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
 		return
 	}
 	room, err := data.RetrieveRoom(roomID)
 	if err != nil {
 		log.Printf("RoomID %d のデータを取得できませんでした.\n", roomID)
 		log.Println(err.Error())
-		c.Writer.Write([]byte(err.Error()))
-		return
-	}
-	resJSON, err := json.MarshalIndent(room, "", "\t")
-	if err != nil {
-		log.Printf("RoomID %d のJSONを作成出来ませんでした.\n", roomID)
-		log.Println(err.Error())
-		c.Writer.Write([]byte(err.Error()))
+		c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
 		return
 	}
 	log.Printf("RoomID %d の部屋を取得\n", room.ID)
-	c.Writer.Write(resJSON)
+	c.JSON(http.StatusOK, room)
 }
 
 // UpdateRoom ... 部屋の情報を更新する
@@ -99,8 +92,7 @@ func UpdateRoom(c *gin.Context) {
 	roomID, err := strconv.Atoi(c.Param("roomID"))
 	if err != nil {
 		log.Println(err.Error())
-		c.Writer.WriteHeader(400)
-		c.Writer.Write([]byte(err.Error()))
+		c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 		return
 	}
 
@@ -108,8 +100,7 @@ func UpdateRoom(c *gin.Context) {
 	room, err := data.RetrieveRoom(roomID)
 	if err != nil {
 		log.Println(err.Error())
-		c.Writer.WriteHeader(404)
-		c.Writer.Write([]byte(err.Error()))
+		c.JSON(http.StatusNotFound, gin.H{"message": err.Error()})
 		return
 	}
 
@@ -121,8 +112,7 @@ func UpdateRoom(c *gin.Context) {
 		log.Printf("%s", string(body))
 		log.Println("リクエストが間違っています.")
 		log.Println(err.Error())
-		c.Writer.WriteHeader(400)
-		c.Writer.Write([]byte(err.Error()))
+		c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 		return
 	}
 	// JSONで指定されたデータroomを更新する
@@ -130,57 +120,46 @@ func UpdateRoom(c *gin.Context) {
 	if err != nil {
 		log.Println("リクエストボディから構造体にマッピング出来ませんでした.")
 		log.Println(err.Error())
-		c.Writer.WriteHeader(400)
-		c.Writer.Write([]byte(err.Error()))
+		c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
 		return
 	}
 
 	// DBに変更を反映する
-	err = room.Update()
-	if err != nil {
+	if err = room.Update(); err != nil {
 		log.Println("部屋のデータを更新出来ませんでした.")
 		log.Println(err.Error())
-		c.Writer.WriteHeader(500)
-		c.Writer.Write([]byte(err.Error()))
-		return
-	}
-
-	resJSON, err := json.MarshalIndent(&room, "", "\t")
-	if err != nil {
-		log.Printf("RoomID %d のJSONを作成出来ませんでした.\n", roomID)
-		log.Println(err.Error())
-		c.Writer.Write([]byte(err.Error()))
+		c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
 		return
 	}
 	log.Printf("RoomID %d の部屋を更新\n", room.ID)
-	c.Writer.Write(resJSON)
+	c.JSON(http.StatusOK, room)
 }
 
 // DeleteRoom ... 部屋を削除する
 func DeleteRoom(c *gin.Context) {
-	roomID, err := strconv.Atoi(c.Param("roomID"))
-	if err != nil {
+	var (
+		roomID int
+		room   *data.Room
+		err    error
+	)
+	if roomID, err = strconv.Atoi(c.Param("roomID")); err != nil {
 		log.Println(err.Error())
-		c.Writer.WriteHeader(400)
-		c.Writer.Write([]byte(err.Error()))
+		c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 		return
 	}
 
 	// 現在の部屋のデータを取得
-	room, err := data.RetrieveRoom(roomID)
-	if err != nil {
+	if room, err = data.RetrieveRoom(roomID); err != nil {
 		log.Println(err.Error())
-		c.Writer.WriteHeader(404)
-		c.Writer.Write([]byte(err.Error()))
+		c.JSON(http.StatusNotFound, gin.H{"message": err.Error()})
 		return
 	}
 
-	err = room.Delete()
-	if err != nil {
+	if err = room.Delete(); err != nil {
 		log.Println(err.Error())
-		c.Writer.WriteHeader(500)
-		c.Writer.Write([]byte(err.Error()))
+		c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
 		return
 	}
 	log.Printf("RoomID %d の部屋を削除\n", room.ID)
+	c.Status(http.StatusOK)
 }
