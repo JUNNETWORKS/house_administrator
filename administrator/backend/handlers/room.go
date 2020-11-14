@@ -10,6 +10,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Binding from JSON
+type NewRoom struct {
+	Name        string `json:"name" binding:"required"`
+	Description string `json:"description" binding:"-"`
+}
+
 // GetRooms ... 全ての部屋の情報をJSONで返す
 // レスポンスの例
 // [{'id': 1,
@@ -22,13 +28,10 @@ func GetRooms(c *gin.Context) {
 	rooms, err := data.GetRooms()
 	if err != nil {
 		log.Println(err)
-	}
-	output, err := json.Marshal(&rooms)
-	if err != nil {
-		log.Println(err)
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "failed get all rooms"})
 	}
 	log.Println("全部屋の情報を取得")
-	c.Writer.Write(output)
+	c.JSON(http.StatusOK, rooms)
 }
 
 // RegisterRoom ... 新しい部屋を登録する
@@ -39,41 +42,26 @@ func GetRooms(c *gin.Context) {
 // 	"owner_id": 1
 // }
 func RegisterRoom(c *gin.Context) {
-	len := c.Request.ContentLength
-	body := make([]byte, len)
-	_, err := c.Request.Body.Read(body)
-	if err != nil && err.Error() != "EOF" {
-		log.Printf("%s", string(body))
+	var err error
+	var newRoom *NewRoom
+	if err = c.BindJSON(newRoom); err != nil {
 		log.Println("リクエストが間違っています.")
-		log.Println(err.Error())
-		c.Writer.Write([]byte(err.Error()))
-		return
-	}
-	var room *data.Room
-	err = json.Unmarshal(body, &room)
-	if err != nil {
 		log.Println("リクエストボディから構造体にマッピング出来ませんでした.")
 		log.Println(err.Error())
-		c.Writer.Write([]byte(err.Error()))
+		c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 		return
 	}
+	room := data.NewRoom(newRoom.Name, newRoom.Description)
 	err = room.Create()
 	if err != nil {
 		log.Println("新しい部屋をDBに挿入出来ませんでした.")
 		log.Println(err.Error())
-		c.Writer.Write([]byte(err.Error()))
+		c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 		return
 	}
 	log.Printf("新しい部屋を追加しました\n%v\n", room)
-	resJSON, err := json.MarshalIndent(room, "", "\t")
-	if err != nil {
-		log.Println("新しい部屋についてのJSONを作成出来ませんでした.")
-		log.Println(err.Error())
-		c.Writer.Write([]byte(err.Error()))
-		return
-	}
 	log.Printf("RoomID %d の部屋を作成\n", room.ID)
-	c.Writer.Write(resJSON)
+	c.JSON(http.StatusOK, room)
 }
 
 // GetRoom ... 部屋の情報を取得して返す
