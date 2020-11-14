@@ -97,5 +97,14 @@ func main() {
 	router.PUT("/rooms/:roomID/controllers/:controllerID/commands/:commandID", dummyHandler)    // コマンドを更新
 	router.DELETE("/rooms/:roomID/controllers/:controllerID/commands/:commandID", dummyHandler) // コマンドを削除
 
-	log.Fatal(router.Run(":8080"))
+	// Run server
+	server := &http.Server{
+		Addr:           ":8080",
+		Handler:        router,
+		ReadTimeout:    10 * time.Second,
+		WriteTimeout:   10 * time.Second,
+		MaxHeaderBytes: 1 << 20,
+	}
+	server.ListenAndServe()
+	log.Println("start runserver at localhost:8080")
 }
