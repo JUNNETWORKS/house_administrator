@@ -42,6 +42,7 @@ func GetRooms(c *gin.Context) {
 // 	"owner_id": 1
 // }
 func RegisterRoom(c *gin.Context) {
+	// TODO: 部屋名が被っていたらエラーを返すようにする
 	var err error
 	var newRoom *RequestRoomBody
 	if err = c.BindJSON(newRoom); err != nil {
