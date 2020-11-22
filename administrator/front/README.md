@@ -1,8 +1,27 @@
 # このディレクトリの役割
 
-Vue.js を使ったフロントエンド部分
+Administrator のフロントエンド
 
 ## 使用技術
 
-- Vue.js
-- Bootstrap
+### Main
+
+- Next.js
+  - TypeScript
+  - react-query (API リクエストのキャッシュ用)
+- Tailwind CSS (CSS 書きたくないので)
+
+### Test
+
+- Jest (JS のテストフレームワーク)
+- React Testing Library (React 公式推奨のテストライブラリ)
+
+### Linter & Formatter
+
+- ESLint
+- Pretitter
+
+### Design
+
+- Figma (フロントエンドの Web デザインで使う)
+- Storybook (UI コンポーネントのカタログが作れる) (UI コンポーネント作っても忘れそうなので導入したい) (余裕があればだけど)
