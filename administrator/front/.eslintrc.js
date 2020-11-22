@@ -33,9 +33,7 @@ module.exports = {
     '@typescript-eslint',
     'import',
     'jsx-a11y',
-    'prefer-arrow',
     'prettier',
-    'react',
     'react-hooks',
   ],
   root: true,
@@ -78,30 +76,26 @@ module.exports = {
         tsx: 'never',
       },
     ],
-    'prefer-arrow/prefer-arrow-functions': [
-      'error',
-      {
-        disallowPrototype: true,
-        singleReturnOnly: false,
-        classPropertiesAllowed: false,
-      },
-    ],
     'react/jsx-filename-extension': [
       'error',
       {
         extensions: ['.jsx', '.tsx'],
       },
     ],
-    'react/jsx-props-no-spreading': [
-      'error',
-      {
-        html: 'enforce',
-        custom: 'enforce',
-        explicitSpread: 'ignore',
-      },
-    ],
+    "import/no-unresolved": [
+      2,
+      { ignore: ['\.(scss|less|css)$'] }
+    ]
   },
   overrides: [
+    {
+      // Next.js のためにいくつかの項目を無効化する
+      'files': ['*.js', '*.jsx', '*.ts', '*.tsx'],
+      'rules': {
+        'react/react-in-jsx-scope': 'off',
+        'react/jsx-props-no-spreading': 'off',
+      }
+    },
     {
       'files': ['*.tsx'],
       'rules': {
@@ -112,8 +106,12 @@ module.exports = {
   settings: {
     'import/resolver': {
       node: {
+        extensions: [".js", ".jsx", ".ts", ".tsx", ".css", "json"],
         paths: ['src'],
       },
     },
+    'import/ignore': {
+      ignore: ['\.(scss|less|css)$']
+    }
   },
 };
