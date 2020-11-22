@@ -6,10 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
-    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
-    "postinstall": "typesync",
-    "lint:conflict": "eslint --print-config .eslintrc.js | eslint-config-prettier-check"
+    "lint": "npm run lint:es && npm run lint:style",
+    "lint:fix": "npm run lint:es:fix && npm run lint:style:fix",
+    "lint:es": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint:es:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint:style": "stylelint 'src/**/*.css'",
+    "lint:style:fix": "stylelint --fix 'src/**/*.css'",
+    "lint:conflict": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+    "postinstall": "typesync"
   },
   "dependencies": {
     "next": "10.0.2",
