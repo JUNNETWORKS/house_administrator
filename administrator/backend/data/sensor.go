@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// Sensor ... センサー情報を表す構造体
+// Sensor: センサー情報を表す構造体
 type Sensor struct {
 	ID         int   `db:"id"`
 	Room       *Room `db:"room_id" json:"-"`
