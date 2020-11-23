@@ -25,3 +25,16 @@ Administrator のフロントエンド
 
 - Figma (フロントエンドの Web デザインで使う)
 - Storybook (UI コンポーネントのカタログが作れる) (UI コンポーネント作っても忘れそうなので導入したい) (余裕があればだけど)
+
+## ディレクトリ構成
+
+presentational component と container component できっちり分離するようにする.
+
+内部はには atomic design で構成する.
+
+```
+src
+├── components  // Presentational Component
+├── containers  // Container Component
+└── pages
+```
