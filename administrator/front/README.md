@@ -28,6 +28,8 @@ Administrator のフロントエンド
 
 ## ディレクトリ構成
 
+とりあえず初期はとくに何も考えず適当に作る. ある程度コード量が増えてきたら以下のように分割する.
+
 presentational component と container component できっちり分離するようにする.
 
 内部はには atomic design で構成する.
