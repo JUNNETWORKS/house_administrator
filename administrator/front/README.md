@@ -9,6 +9,7 @@ Administrator のフロントエンド
 - Next.js
   - TypeScript
   - react-query (API リクエストのキャッシュ用)
+  - [Emotion](https://emotion.sh/docs/introduction): styled-component 的なやつ
 - Tailwind CSS (CSS 書きたくないので)
 
 ### Test
@@ -40,3 +41,8 @@ src
 ├── containers  // Container Component
 └── pages
 ```
+
+## ルーティング
+
+| URL | 説明 |
+| --- | ---- |
