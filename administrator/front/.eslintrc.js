@@ -38,6 +38,8 @@ module.exports = {
   ],
   root: true,
   rules: {
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
     'lines-between-class-members': [
       'error',
       'always',
