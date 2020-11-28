@@ -9,6 +9,7 @@ const RoomItem: React.FC = () => {
           display: 'flex',
           flexDirection: 'column',
           border: '1px solid black',
+          width: '20%',
         }}
       >
         <img
