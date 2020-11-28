@@ -10,6 +10,7 @@ const AllRooms: FC = () => {
         const roomDatas = await getAllRooms();
         setRooms(roomDatas);
       } catch (err) {
+        console.dir(err);
         throw new Error('Error');
       }
     };
