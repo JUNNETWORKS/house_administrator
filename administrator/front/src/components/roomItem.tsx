@@ -1,7 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 
-const RoomItem: React.FC = () => {
+type RoomItemProps = {
+  name: string;
+  id: number;
+  description: string;
+};
+
+const RoomItem: React.FC<RoomItemProps> = ({ name, id, description }) => {
   return (
     <>
       <div
@@ -18,10 +24,10 @@ const RoomItem: React.FC = () => {
           width={256}
           height={144}
         />
-        <p>Room Name</p>
-        <p>Room Description</p>
-        <Link href="/rooms/hogehoge">
-          <a>Go to Room Page</a>
+        <p>{name}</p>
+        <p>{description}</p>
+        <Link href={`/rooms/${id}`}>
+          <a style={{ color: 'red' }}>Go to Room Page</a>
         </Link>
       </div>
     </>
