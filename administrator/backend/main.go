@@ -23,6 +23,14 @@ func dummyHandler(c *gin.Context) {
 
 func main() {
 
+	// Logging to a file.
+	f, _ := os.Create("gin.log")
+	// Write the logs to file and console at the same time.
+	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
+	// Disable Console Color, you don't need console color when writing the logs to file.
+	// gin.DisableConsoleColor()
+	gin.ForceConsoleColor()
+
 	// マルチプレクサにはginを使う
 	// gin.New() はミドルウェアが何も入っていないまっさらなginEngineを返す
 	router := gin.New()
@@ -42,13 +50,6 @@ func main() {
 			param.ErrorMessage,
 		)
 	}))
-	// Logging to a file.
-	f, _ := os.Create("gin.log")
-	// Write the logs to file and console at the same time.
-	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
-	// Disable Console Color, you don't need console color when writing the logs to file.
-	// gin.DisableConsoleColor()
-	gin.ForceConsoleColor()
 
 	// Recovery middleware recovers from any panics and writes a 500 if there was one.
 	router.Use(gin.Recovery())

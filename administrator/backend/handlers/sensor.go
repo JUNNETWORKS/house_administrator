@@ -1,10 +1,7 @@
 package handlers
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
-	"github.com/julienschmidt/httprouter"
 )
 
 // TODO: GetSensors ... 部屋にある全てのセンサーを取得し, JSONで返す
