@@ -4,14 +4,16 @@ export type Room = {
   description: string;
   hostName: string;
   ownerId?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
 };
 
 const isRoom = (arg: unknown): arg is Room => {
   const u = arg as Room;
 
   return (
-    typeof u?.id === 'string' &&
-    typeof u?.name === 'number' &&
+    typeof u?.id === 'number' &&
+    typeof u?.name === 'string' &&
     typeof u?.description === 'string' &&
     typeof u?.hostName === 'string' &&
     (typeof u?.ownerId === 'number' || typeof u?.ownerId === 'undefined')
