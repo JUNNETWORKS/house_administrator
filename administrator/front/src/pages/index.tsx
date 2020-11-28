@@ -1,7 +1,5 @@
 import { FC } from 'react';
-import RoomItem from 'components/roomItem';
+import AllRooms from 'containers/allRooms';
 
-const Home: FC = () => {
-  return <RoomItem />;
-};
+const Home: FC = () => <AllRooms />;
 export default Home;
