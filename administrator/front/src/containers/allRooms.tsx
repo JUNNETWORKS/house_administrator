@@ -22,7 +22,12 @@ const AllRooms: FC = () => {
   return (
     <div>
       {rooms.map((room: Room) => (
-        <p>{room.name}</p>
+        <RoomItem
+          name={room.name}
+          id={room.id}
+          description={room.description}
+          key={room.id}
+        />
       ))}
     </div>
   );
