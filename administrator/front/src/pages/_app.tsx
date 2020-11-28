@@ -1,13 +1,23 @@
 import 'tailwindcss/tailwind.css';
+import Head from 'next/head';
 import { AppProps } from 'next/app';
 import Header from 'components/header';
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <div className="bg-gray-100">
-      <Header title="this is top page" />
-      <Component {...pageProps} />;
-    </div>
+    <>
+      <Head>
+        <title>My page</title>
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width"
+        />
+      </Head>
+      <div>
+        <Header title="this is top page" />
+        <Component {...pageProps} />
+      </div>
+    </>
   );
 };
 
