@@ -1,18 +1,30 @@
-import React from 'react';
+import { useState, FC, useEffect } from 'react';
 import RoomItem from 'components/roomItem';
-import { getAllRooms } from 'domains/administrator';
+import { Room, getAllRooms } from 'domains/administrator';
 
 const AllRooms: FC = () => {
-  try {
-    const allRooms = getAllRooms();
-  } catch (e) {
-    console.dir(e);
-    return <p>Error</p>;
-  }
-  const roomItems = allRooms.map((room) => <RoomItem>room.
+  const [rooms, setRooms] = useState<Room[]>([]);
+  useEffect(() => {
+    const load = async (): Promise<void> => {
+      try {
+        const roomDatas = await getAllRooms();
+        setRooms(roomDatas);
+      } catch (err) {
+        throw new Error('Error');
+      }
+    };
+
+    // 返ってくるPromiseをあえて無視することを明示するためにvoid四季を利用している
+    void load();
+  }, []);
 
   return (
     <div>
-      <RoomItem />;
-      </div>
+      {rooms.map((room: Room) => (
+        <p>{room.name}</p>
+      ))}
+    </div>
+  );
 };
+
+export default AllRooms;
