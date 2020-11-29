@@ -47,6 +47,13 @@ module.exports = {
         exceptAfterSingleLine: true,
       },
     ],
+    // Next.jsのLinkコンポーネント対応
+    "jsx-a11y/anchor-is-valid": [ 
+      "error", {
+      "components": [ "Link" ],
+      "specialLink": [ "hrefLeft", "hrefRight" ],
+      "aspects": [ "invalidHref", "preferButton" ]
+    }],
     // should be rewritten as `['error', { allowAsStatement: true }]` in ESLint 7 or later
     // SEE: https://github.com/typescript-eslint/typescript-eslint/issues/1184
     'no-void': 'off',
