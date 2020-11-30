@@ -5,13 +5,12 @@ import (
 	"log"
 
 	"github.com/JUNNETWORKS/house_administrator/utils"
-
-	"github.com/jmoiron/sqlx"
-	_ "github.com/lib/pq"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 // Db はsqlにアクセスするためのパッケージ変数
-var Db *sqlx.DB
+var Db *gorm.DB
 
 func init() {
 	var err error
@@ -22,9 +21,12 @@ func init() {
 	dbuser := utils.GetEnvWithDefault("DB_USER", "postgres")
 	dbpass := utils.GetEnvWithDefault("DB_PASS", "postgres")
 	dataSourceName := fmt.Sprintf("host=%s port=%s dbname=%s user=%s password=%s sslmode=disable", dbhost, dbport, dbname, dbuser, dbpass)
-	Db, err = sqlx.Open("postgres", dataSourceName)
+	Db, err = gorm.Open(postgres.Open(dataSourceName), &gorm.Config{})
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// Auto Migarations
+	Db.AutoMigrate(&Room{})
 	return
 }
