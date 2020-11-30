@@ -1,13 +1,25 @@
 package data
 
 import (
-	"time"
+	"gorm.io/gorm"
 )
 
-// Controller ... センサー情報を表す構造体
+// Controller コントローラー情報を表す構造体
 type Controller struct {
-	ID        int       `db:"id"`
-	Room      *Room     `db:"room_id" json:"-"`
-	CreatedAt time.Time `db:"create_at"`
-	UpdatedAt time.Time `db:"updated_at"`
+	gorm.Model
+	Name   string `json:"name"`
+	RoomID uint   `json:"-"`
+}
+
+// GetRoomControllers 部屋のIDを元にその部屋に紐付いているControllerを返す
+func GetRoomControllers(roomID int) ([]Controller, error) {
+	var controllers []Controller
+	result := Db.Where("room_id = ?", roomID).Find(&controllers)
+	return controllers, result.Error
+}
+
+// Create DBに挿入する
+func (controller *Controller) Create() error {
+	result := Db.Create(controller)
+	return result.Error
 }

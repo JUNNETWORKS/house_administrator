@@ -7,14 +7,15 @@ import (
 // Room はDBにおけるroomsテーブルの各行を表す構造体
 type Room struct {
 	gorm.Model
-	Name        string   `db:"name" json:"name"`
-	Description string   `db:"description" json:"description"`
-	HostName    string   `db:"host" json:"host_name"`
-	OwnerID     int      `db:"owner_id" json:"owner_id"`
-	Sensors     []Sensor `json:"sensors"`
+	Name        string       `json:"name"`
+	Description string       `json:"description"`
+	HostName    string       `json:"host_name"`
+	Sensors     []Sensor     `json:"sensors"`
+	Controllers []Controller `json:"controllers"`
+	// OwnerID     int      `db:"owner_id" json:"owner_id"`
 }
 
-// NewRoom ... 構造体Roomのポインタを返す
+// NewRoom  構造体Roomのポインタを返す
 func NewRoom(name string, description string) *Room {
 	room := &Room{Name: name, Description: description}
 	return room

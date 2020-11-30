@@ -27,6 +27,6 @@ func init() {
 	}
 
 	// Auto Migarations
-	Db.AutoMigrate(&Room{})
+	Db.AutoMigrate(&User{}, &Room{}, &Controller{}, &Command{}, &Sensor{}, &Measurement{})
 	return
 }
