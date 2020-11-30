@@ -44,15 +44,16 @@ func GetRooms(c *gin.Context) {
 func RegisterRoom(c *gin.Context) {
 	// TODO: 部屋名が被っていたらエラーを返すようにする
 	var err error
-	var newRoom *RequestRoomBody
-	if err = c.BindJSON(newRoom); err != nil {
+	reqBody := new(RequestRoomBody)
+	if err = c.BindJSON(reqBody); err != nil {
 		log.Println("リクエストが間違っています.")
 		log.Println("リクエストボディから構造体にマッピング出来ませんでした.")
 		log.Println(err.Error())
+		log.Printf("%+v\n", err)
 		c.JSON(http.StatusBadRequest, gin.H{"message": err.Error()})
 		return
 	}
-	room := data.NewRoom(newRoom.Name, newRoom.Description)
+	room := data.NewRoom(reqBody.Name, reqBody.Description)
 	err = room.Create()
 	if err != nil {
 		log.Println("新しい部屋をDBに挿入出来ませんでした.")
