@@ -34,7 +34,7 @@ func GetRooms(c *gin.Context) {
 	c.JSON(http.StatusOK, rooms)
 }
 
-// RegisterRoom ... 新しい部屋を登録する
+// RegisterRoom  新しい部屋を登録する
 // リクエストの例
 // {
 // 	"name": "New Room",
@@ -66,7 +66,7 @@ func RegisterRoom(c *gin.Context) {
 	c.JSON(http.StatusOK, room)
 }
 
-// GetRoom ... 部屋の情報を取得して返す
+// GetRoom  部屋の情報を取得して返す
 func GetRoom(c *gin.Context) {
 	roomID, err := strconv.Atoi(c.Param("roomID"))
 	if err != nil {
@@ -85,7 +85,7 @@ func GetRoom(c *gin.Context) {
 	c.JSON(http.StatusOK, room)
 }
 
-// UpdateRoom ... 部屋の情報を更新する
+// UpdateRoom  部屋の情報を更新する
 // 例: descriptionを変更する
 // {
 // 	"description": "let's change description!"
